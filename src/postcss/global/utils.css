@@ -1,0 +1,15 @@
+.left-0 {
+	left: 0;
+}
+
+.text-right {
+	text-align: right;
+}
+
+.ratio-9x16 {
+	&:after {
+		content: '';
+		display: block;
+		padding-top: calc(16 / 9 * 100%);
+	}
+}

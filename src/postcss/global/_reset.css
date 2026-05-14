@@ -1,0 +1,34 @@
+figure {
+	margin: 0;
+}
+
+html,
+body {
+	max-width: 100%;
+	/* clip: chặn tràn ngang như hidden nhưng không tạo scrollport — giữ position:sticky cho header */
+	overflow-x: clip;
+	background-color: var(--primary-background);
+}
+
+.entry-content {
+	& .lwptoc {
+		& a {
+			text-decoration: none;
+		}
+	}
+
+	& .lwptoc_item {
+		font-size: var(--text-small);
+	}
+}
+
+.swiper-button {
+	&:after {
+		content: none;
+	}
+}
+
+.container .site-content .content-area,
+.container-fluid .site-content .content-area {
+	max-width: 100%;
+}

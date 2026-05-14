@@ -1,0 +1,62 @@
+$enable-dark-mode: false;
+$enable-important-utilities: false;
+$enable-cssgrid: false;
+
+// Colors
+$primary: #000;
+$secondary: #0450a0;
+
+// Buttons
+$btn-font-size-sm: 12px;
+$btn-border-radius: 12px;
+$btn-padding-x: 24px;
+$btn-padding-y: 12px;
+
+// Heading
+$headings-margin-bottom: 12px;
+$headings-line-height: 1.5;
+
+// Grid
+$headings-font-weight: 400;
+$grid-gutter-x: 16px;
+$grid-gutter-y: 12px;
+
+$spacer: 1em;
+$spacers: (
+	0: 0,
+	1: $spacer * 1,
+	2: $spacer * 2,
+	3: $spacer * 3,
+	4: $spacer * 4,
+	5: $spacer * 5
+);
+
+$container-max-widths: (
+	sm: 540px,
+	md: 720px,
+	lg: 940px,
+	xl: 1200px,
+	xxl: 1320px,
+	xxxl: 1700px
+);
+
+$grid-breakpoints: (
+	xs: 0,
+	sm: 600px,
+	md: 782px,
+	lg: 960px,
+	xl: 1280px,
+	xxl: 1440px,
+	xxxl: 1920px
+);
+
+$font-size-base: 1rem;
+
+$h1-font-size: $font-size-base * 2.6 !default;
+$h2-font-size: $font-size-base * 2.2 !default;
+$h3-font-size: $font-size-base * 1.8 !default;
+$h4-font-size: $font-size-base * 1.4 !default;
+$h5-font-size: $font-size-base * 1.2 !default;
+$h6-font-size: $font-size-base !default;
+$font-family-base: 'Fz Poppins';
+$headings-font-family: 'Fz Poppins';

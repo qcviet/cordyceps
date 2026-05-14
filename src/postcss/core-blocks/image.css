@@ -1,0 +1,45 @@
+.image--cover {
+	& .image__img {
+		object-fit: cover;
+	}
+}
+
+.image--cover,
+.image--contain {
+	position: relative;
+
+	& .image__img {
+		@mixin abs-full;
+	}
+}
+
+.image--contain {
+	& .image__img {
+		object-fit: contain;
+	}
+}
+
+.image--default {
+	& .image__img {
+		position: static;
+		max-width: 100%;
+		height: auto;
+	}
+}
+
+.image--effect {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	position: relative;
+	& .image__img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		transition: transform 0.5s ease;
+	}
+
+	& .image__img:hover {
+		transform: scale(1.2);
+	}
+}

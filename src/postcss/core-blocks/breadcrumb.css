@@ -1,0 +1,24 @@
+
+.rank-math-breadcrumb {
+    font-size: 18px;
+}
+
+.rank-math-breadcrumb p {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 0;
+}
+
+.rank-math-breadcrumb a {
+    transition: all 0.2s ease;
+}
+
+.rank-math-breadcrumb a:hover {
+    color: var(--primary-green);
+}
+
+.rank-math-breadcrumb span:last-child {
+    color: var(--primary-green);
+    font-weight: 500;
+}

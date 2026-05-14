@@ -1,0 +1,26 @@
+.accordions__item-content {
+	max-height: 0;
+	opacity: 0;
+	overflow: hidden;
+	transition: all 0.4s ease;
+
+	&.is-active {
+		opacity: 1;
+	}
+}
+
+.accordion__item-button {
+	&:hover,
+	&:focus {
+		background: none;
+		color: var(--bs-dark);
+	}
+
+	& .icon {
+		transition: transform 0.3s ease;
+	}
+
+	&.is-active .icon {
+		transform: rotate(45deg);
+	}
+}

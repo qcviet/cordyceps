@@ -1,0 +1,32 @@
+@import url('variables.css');
+@import url('global/index.css');
+@import url('core-blocks/index.css');
+@import url('blocks/index.css');
+@import url('theme/index.css');
+
+html.is-app-loading body {
+	opacity: 0.98;
+}
+
+.hero-section[data-loading='true']:after {
+	content: 'Loading content...';
+	display: block;
+	text-align: center;
+	margin-top: 12px;
+	color: #666;
+	font-size: 14px;
+}
+
+.hero-section[data-error='true']:after,
+html.is-app-error body:before {
+	content: 'Something went wrong while loading this section.';
+	display: block;
+	text-align: center;
+	padding: 10px 12px;
+	background: #fff0f0;
+	color: #a61b1b;
+	margin: 10px auto;
+	max-width: 720px;
+	border: 1px solid #f0cccc;
+	border-radius: 6px;
+}
