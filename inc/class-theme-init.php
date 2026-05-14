@@ -35,6 +35,23 @@ class Theme_Init
 		$this->register_layout_hooks();
 
 		add_action('after_setup_theme', [$this, 'theme_supports']);
+
+		add_filter('body_class', [$this, 'body_class_introduce_landing']);
+	}
+
+	/**
+	 * Body class for introduce landing template (scoped header / hero styling).
+	 *
+	 * @param string[] $classes
+	 * @return string[]
+	 */
+	public function body_class_introduce_landing($classes)
+	{
+		if (is_page_template('templates/introduce-page.php')) {
+			$classes[] = 'cordyceps-introduce-landing';
+		}
+
+		return $classes;
 	}
 
 	function preconnect_google_fonts()
