@@ -84,6 +84,14 @@
 	--header-toggle-bg: rgb(249 246 241 / 72%);
 	--header-toggle-bg-scrolled: rgb(249 246 241 / 82%);
 	--site-header-overlay-scrim: rgb(15 47 40 / 48%);
+
+	--benefits-fg: #1f3a37;
+	--benefits-gold: #d4a056;
+	--benefits-gold-icon: #e8c992;
+	--benefits-body-muted: #3d524f;
+	--benefits-image-veil-strong: rgb(246 241 231 / 90%);
+	--benefits-image-veil-mid: rgb(255 255 255 / 48%);
+	--benefits-image-veil-soft: rgb(255 255 255 / 14%);
 }
 
 @custom-media --max-mobile (max-width: 575px);
