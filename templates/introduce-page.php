@@ -31,7 +31,17 @@ get_header();
 					]);
 					get_template_part('templates/blocks/hero-banner', null, $data);
 					break;
-
+				case 'about_section':
+					$data = cordyceps_get_flexible_content_data([
+						'class' => '',
+						'subtitle' => 'subtitle',
+						'title' => 'title',
+						'description' => 'description',
+						'history_items' => 'history_items',
+						'image' => 'image',
+					]);
+					get_template_part('templates/blocks/about-section', null, $data);
+					break;
 			endswitch;
 		endwhile;
 	}
