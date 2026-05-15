@@ -55,6 +55,17 @@ get_header();
 					]);
 					get_template_part('templates/blocks/process-section', null, $data);
 					break;
+				case 'benefits_section':
+					$data = cordyceps_get_flexible_content_data([
+						'class' => '',
+						'title' => 'title',
+						'subtitle' => 'subtitle',
+						'description' => 'description',
+						'icon_items' => 'icon_items',
+						'image' => 'image',
+					]);
+					get_template_part('templates/blocks/benefits-section', null, $data);
+					break;
 			endswitch;
 		endwhile;
 	}
