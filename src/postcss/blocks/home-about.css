@@ -1,0 +1,194 @@
+.home-about-section {
+	margin: 0;
+	padding: 0;
+	display: block;
+}
+
+.home-about {
+	--home-about-min-h: clamp(500px, 80vh, 750px);
+	box-sizing: border-box;
+	position: relative;
+	width: 100vw;
+	max-width: 100vw;
+	margin-left: calc(50% - 50vw);
+	margin-right: calc(50% - 50vw);
+	min-height: var(--home-about-min-h);
+	overflow: hidden;
+	isolation: isolate;
+
+}
+
+.home-about__media {
+	position: absolute;
+	inset: 0;
+	z-index: 0;
+	display: block;
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	pointer-events: none;
+}
+
+.home-about__media .image__img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	object-position: center center;
+}
+
+.home-about__inner {
+	position: relative;
+	z-index: 2;
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	justify-content: center;
+	min-height: var(--home-about-min-h);
+	padding-top: clamp(64px, 7vh, 88px);
+	padding-bottom: clamp(28px, 4vh, 48px);
+}
+
+.home-about__content {
+	position: relative;
+	z-index: 1;
+	box-sizing: border-box;
+	width: 100%;
+	max-width: min(100%, 520px);
+	color: var(--luxury-gold);
+	text-align: left;
+}
+
+.home-about__subtitle {
+	margin: 0 0 clamp(12px, 1.8vw, 18px);
+	font-family: Inter, system-ui, sans-serif;
+	font-size: clamp(11px, 1.1vw, 16px);
+	font-weight: 500;
+	line-height: 1.45;
+	letter-spacing: 0.28em;
+	text-transform: uppercase;
+	color: var(--luxury-gold);
+}
+
+.home-about__title {
+	margin: 0 0 clamp(12px, 1.8vw, 18px);
+	font-family: 'Cormorant Garamond', Georgia, serif;
+	font-size: clamp(48px, 5.2vw, 68px);
+	font-weight: 700;
+	color: var(--benefits-fg);
+}
+
+.home-about__description {
+	margin: 0 0 clamp(20px, 2.8vw, 28px);
+	font-family: Inter, system-ui, sans-serif;
+	font-size: clamp(14px, 1.25vw, 16px);
+	font-weight: 500;
+	color: var(--benefits-fg);
+	max-width: 46ch;
+}
+
+
+.home-about__button {
+	margin: 0;
+}
+
+.home-about__button-link {
+	display: inline-flex;
+	align-items: center;
+	gap: 14px;
+	padding: 12px 14px 12px 24px;
+	border: 0;
+	border-radius: 999px;
+	font-family: Inter, system-ui, sans-serif;
+	font-size: clamp(12px, 1.1vw, 13px);
+	font-weight: 600;
+	line-height: 1;
+	letter-spacing: 0.16em;
+	text-transform: uppercase;
+	text-decoration: none;
+	color: #fff;
+	background: linear-gradient(
+		118deg,
+		#fff8e8 0%,
+		var(--luxury-gold) 38%,
+		var(--luxury-gold-deep) 78%,
+		#9a7424 100%
+	);
+	box-shadow:
+		0 14px 30px -14px rgb(14 42 36 / 45%),
+		inset 0 1px 0 rgb(255 255 255 / 35%);
+	transition:
+		transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+		box-shadow 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+		filter 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.home-about__button-text {
+	display: inline-block;
+	line-height: 1;
+}
+
+.home-about__button-icon {
+	box-sizing: border-box;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 32px;
+	height: 32px;
+	flex-shrink: 0;
+	border: 1px solid rgb(255 255 255 / 90%);
+	border-radius: 50%;
+	color: var(--benefits-fg);
+	background-color: #fff;
+	transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.home-about__button-icon svg {
+	display: block;
+	width: 14px;
+	height: 14px;
+}
+
+.home-about__button-icon svg [fill]:not([fill='none']) {
+	fill: currentColor;
+}
+
+.home-about__button-icon svg [stroke]:not([stroke='none']) {
+	stroke: currentColor;
+}
+
+.home-about__button-link:hover,
+.home-about__button-link:focus-visible {
+	color: #fff;
+	filter: brightness(1.05);
+	box-shadow:
+		0 18px 34px -12px rgb(14 42 36 / 55%),
+		inset 0 1px 0 rgb(255 255 255 / 45%);
+	transform: translateY(-2px);
+}
+
+.home-about__button-link:hover .home-about__button-icon,
+.home-about__button-link:focus-visible .home-about__button-icon {
+	transform: translateX(3px);
+}
+
+.home-about__button-link:focus-visible {
+	outline: 2px solid var(--luxury-gold);
+	outline-offset: 3px;
+}
+
+.home-about__button-link:active {
+	transform: translateY(0);
+}
+
+@media (max-width: 781px) {
+	.home-about__content {
+		max-width: 100%;
+	}
+
+	.home-about__description {
+		max-width: none;
+	}
+}
