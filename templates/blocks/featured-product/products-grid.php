@@ -17,7 +17,7 @@ $args = wp_parse_args($args, [
 ]);
 
 $query = $args['query'] instanceof WP_Query ? $args['query'] : null;
-$has_products = $query instanceof WP_Query && $query->have_posts();
+$has_products = !empty(cordyceps_get_featured_product_ids_from_query($query));
 ?>
 
 <div class="fp__grid-wrapper" data-fp-grid-wrapper>
@@ -28,7 +28,7 @@ $has_products = $query instanceof WP_Query && $query->have_posts();
 
 	<div class="fp__grid" data-fp-grid role="list">
 		<?php if ($has_products) : ?>
-			<?php echo cordyceps_render_featured_product_cards($query);?>
+			<?php cordyceps_loop_featured_product_cards($query); ?>
 		<?php else : ?>
 			<p class="fp__empty"><?php esc_html_e('Chưa có sản phẩm trong danh mục này.', 'cordyceps'); ?></p>
 		<?php endif; ?>
