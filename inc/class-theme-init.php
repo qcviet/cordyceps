@@ -12,6 +12,7 @@ namespace Cordyceps;
 
 include_once get_theme_file_path('inc/helpers/env.php');
 include_once get_theme_file_path('inc/helpers/cdn.php');
+include_once get_theme_file_path('inc/helpers/query-limits.php');
 include_once get_theme_file_path('inc/helpers/queries.php');
 include_once get_theme_file_path('inc/helpers/formatting.php');
 include_once get_theme_file_path('inc/helpers/template-tags.php');
