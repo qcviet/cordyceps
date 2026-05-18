@@ -11,6 +11,8 @@
 $data = wp_parse_args($args, [
 	'post_id' => 0,
 	'class' => '',
+	'show_cta' => false,
+	'cta_text' => '',
 ]);
 
 $post_id = absint($data['post_id']);
@@ -29,6 +31,10 @@ if (!$permalink || !$title) {
 $excerpt = cordyceps_get_post_excerpt_plain($post_id, 16);
 
 $date_label = date_i18n('m/Y', (int) get_post_time('U', true, $post_id));
+
+$cta_text = !empty($data['cta_text'])
+	? $data['cta_text']
+	: __('Xem thêm', 'cordyceps');
 
 $_class = 'news-section__card';
 $_class .= !empty($data['class']) ? ' ' . esc_attr($data['class']) : '';
@@ -58,6 +64,12 @@ $_class .= !empty($data['class']) ? ' ' . esc_attr($data['class']) : '';
 			<h3 class="news-section__card-title"><?php echo esc_html($title); ?></h3>
 			<?php if ('' !== trim($excerpt)) : ?>
 				<p class="news-section__card-excerpt"><?php echo esc_html($excerpt); ?></p>
+			<?php endif; ?>
+			<?php if (!empty($data['show_cta'])) : ?>
+				<span class="news-page-card__cta">
+					<span class="news-page-card__cta-text"><?php echo esc_html($cta_text); ?></span>
+					<span class="news-page-card__cta-icon" aria-hidden="true"><?php echo cordyceps_get_svg_icon('chevron-right'); ?></span>
+				</span>
 			<?php endif; ?>
 		</div>
 	</a>
