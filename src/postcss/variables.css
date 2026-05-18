@@ -70,6 +70,9 @@
 	--luxury-gold-soft: rgb(221 178 77 / 42%);
 	--luxury-forest: #0f2f28;
 	--luxury-forest-soft: rgb(15 47 40 / 78%);
+	--news-forest: #0f3b2e;
+	--news-gold: #c89b3c;
+	--news-cream: #f7f3ec;
 
 	--header-bg-scrolled: var(--luxury-cream-pale);
 	--header-bg-scrolled-backdrop: rgb(249 246 241 / 90%);
