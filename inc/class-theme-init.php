@@ -15,7 +15,10 @@ include_once get_theme_file_path('inc/helpers/cdn.php');
 include_once get_theme_file_path('inc/helpers/queries.php');
 include_once get_theme_file_path('inc/helpers/formatting.php');
 include_once get_theme_file_path('inc/helpers/template-tags.php');
+include_once get_theme_file_path('inc/helpers/featured-product.php');
 include_once get_theme_file_path('inc/helpers/debug.php');
+
+require_once get_theme_file_path('inc/ajax/featured-product-ajax.php');
 
 class Theme_Init
 {
@@ -31,6 +34,7 @@ class Theme_Init
 
 		add_action('wp_enqueue_scripts', [$this, 'critical_frontend_assets'], 1);
 		add_action('wp_enqueue_scripts', [$this, 'register_frontend_assets'], 60);
+		add_action('wp_enqueue_scripts', [$this, 'localize_featured_product_script'], 70);
 
 		$this->register_layout_hooks();
 
@@ -88,6 +92,24 @@ class Theme_Init
 		wp_enqueue_style('font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css', [], '5.15.4');
 
 		wp_enqueue_style('cordyceps-custom-theme', get_stylesheet_uri(), [], $this->theme_version);
+	}
+
+	/**
+	 * Pass AJAX config to featured product block script.
+	 */
+	function localize_featured_product_script()
+	{
+		wp_localize_script(
+			'cordyceps-frontend',
+			'cordycepsFeaturedProduct',
+			[
+				'ajaxUrl' => admin_url('admin-ajax.php'),
+				'nonce' => wp_create_nonce('cordyceps_featured_product'),
+				'action' => 'cordyceps_filter_featured_products',
+				'emptyText' => esc_html__('Chưa có sản phẩm trong danh mục này.', 'cordyceps'),
+				'errorText' => esc_html__('Không thể tải sản phẩm. Vui lòng thử lại.', 'cordyceps'),
+			]
+		);
 	}
 
 	/**
