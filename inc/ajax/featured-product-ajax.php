@@ -48,7 +48,7 @@ function cordyceps_ajax_filter_featured_products()
 
 	if ($category_id < 1) {
 		$query = cordyceps_query_all_featured_products($scope_term_ids);
-		$html = cordyceps_render_featured_product_cards($query);
+		$html = cordyceps_get_featured_product_cards_html($query);
 
 		wp_send_json_success(
 			[
@@ -70,7 +70,7 @@ function cordyceps_ajax_filter_featured_products()
 	}
 
 	$query = cordyceps_query_featured_products($category_id);
-	$html = cordyceps_render_featured_product_cards($query);
+	$html = cordyceps_get_featured_product_cards_html($query);
 
 	wp_send_json_success(
 		[
