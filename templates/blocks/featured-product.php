@@ -12,16 +12,13 @@ $data = wp_parse_args($args, [
 	'class' => '',
 	'title' => '',
 	'description' => '',
-	'category_product' => [],
 	'category_items' => [],
+	'category_product' => [],
 ]);
 
-$category_raw = !empty($data['category_product'])
-	? $data['category_product']
-	: $data['category_items'];
-
-$scope_ids = cordyceps_normalize_featured_product_term_ids($category_raw);
-$categories = cordyceps_get_featured_product_categories($category_raw);
+$selected_ids = cordyceps_resolve_featured_product_scope_ids($data);
+$tab_categories = cordyceps_get_featured_product_tab_categories($selected_ids);
+$scope_ids = cordyceps_get_featured_product_scope_ids_for_query($tab_categories, $selected_ids);
 $active_id = 0;
 $initial_query = cordyceps_query_all_featured_products($scope_ids);
 $scope_attr = !empty($scope_ids) ? implode(',', $scope_ids) : '';
@@ -30,7 +27,11 @@ $_class = 'fp';
 $_class .= !empty($data['class']) ? ' ' . esc_attr($data['class']) : '';
 ?>
 
-<section class="fp-section" data-block="featured-product" <?php if ('' !== $scope_attr) : ?> data-fp-scope="<?php echo esc_attr($scope_attr); ?>" <?php endif; ?>>
+<section
+	class="fp-section"
+	data-block="featured-product"
+	data-fp-scope="<?php echo esc_attr($scope_attr); ?>"
+>
 	<div class="<?php echo esc_attr($_class); ?> py-2">
 		<div class="fp__inner container">
 			<?php if (!empty($data['title'])) : ?>
@@ -52,7 +53,7 @@ $_class .= !empty($data['class']) ? ' ' . esc_attr($data['class']) : '';
 				'templates/blocks/featured-product/category-tabs',
 				null,
 				[
-					'categories' => $categories,
+					'categories' => $tab_categories,
 					'active_id' => $active_id,
 				]
 			);
