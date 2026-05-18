@@ -40,6 +40,16 @@ if (have_rows('sections')) {
 				]);
 				get_template_part('templates/blocks/trust-badges', null, $data);
 				break;
+
+			case 'featured_product':
+				$data = cordyceps_get_flexible_content_data([
+					'class' => '',
+					'title' => 'title',
+					'description' => 'description',
+					'category_product' => 'category_product',
+				]);
+				get_template_part('templates/blocks/featured-product', null, $data);
+				break;
 		endswitch;
 	endwhile;
 }
