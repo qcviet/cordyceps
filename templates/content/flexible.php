@@ -57,6 +57,7 @@ while (have_rows('sections', $post_id)) :
 				'class' => '',
 				'title' => 'title',
 				'description' => 'description',
+				'category_items' => 'category_items',
 				'category_product' => 'category_product',
 			]);
 			get_template_part('templates/blocks/featured-product', null, $data);
