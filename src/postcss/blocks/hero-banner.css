@@ -21,6 +21,22 @@
 	margin-bottom: 0;
 	padding-top: 0;
 	padding-bottom: 0;
+	min-width: 0;
+	max-width: 100%;
+	width: 100%;
+	box-sizing: border-box;
+}
+
+/*
+ * Hero full-bleed dùng 100vw — flex item mặc định min-width:auto lấy min-content ~100vw
+ * → .content-area / .entry-content vỡ, khoảng trắng bên phải (đặc biệt template page tùy).
+ */
+body:has(.hero-banner-section) .site-content,
+body:has(.hero-banner-section) .site-content .content-area,
+.inside-article:has(.hero-banner-section) {
+	min-width: 0;
+	max-width: 100%;
+	box-sizing: border-box;
 }
 
 body:has(.hero-banner-section) #page {
@@ -60,39 +76,43 @@ body:has(.hero-banner-section) .entry-content:has(.hero-banner-section) {
 	margin-right: 0;
 }
 
-/* Landing introduce (template tùy): giữ đồng bộ với :has ở trên */
-body.cordyceps-introduce-landing #page {
-	--bs-gutter-x: 0;
-	--bs-gutter-y: 0;
-	max-width: none;
-	width: 100%;
-	box-sizing: border-box;
-	padding-left: 0;
-	padding-right: 0;
+/* Landing page templates (introduce / product): giữ đồng bộ với :has ở trên */
+body.cordyceps-introduce-landing,
+body.cordyceps-product-landing {
+	#page {
+		--bs-gutter-x: 0;
+		--bs-gutter-y: 0;
+		max-width: none;
+		width: 100%;
+		box-sizing: border-box;
+		padding-left: 0;
+		padding-right: 0;
+	}
+
+	#content.site-content {
+		width: 100%;
+		max-width: none;
+		flex: 1 1 auto;
+		min-width: 0;
+		padding-left: 0;
+		padding-right: 0;
+		box-sizing: border-box;
+	}
+
+	#content.site-content .content-area {
+		width: 100%;
+		max-width: none;
+		flex: 1 1 100%;
+	}
 }
 
-body.cordyceps-introduce-landing #content.site-content {
-	width: 100%;
-	max-width: none;
-	flex: 1 1 auto;
-	min-width: 0;
-	padding-left: 0;
-	padding-right: 0;
-	box-sizing: border-box;
-}
-
-body.cordyceps-introduce-landing .introduce-page--hero-landing:has(.hero-banner) {
+body.cordyceps-introduce-landing .introduce-page--hero-landing:has(.hero-banner),
+body.cordyceps-product-landing .product-page--hero-landing:has(.hero-banner) {
 	box-sizing: border-box;
 	width: 100%;
 	max-width: none;
 	margin-inline: 0;
 	padding-inline: 0;
-}
-
-body.cordyceps-introduce-landing #content.site-content .content-area {
-	width: 100%;
-	max-width: none;
-	flex: 1 1 100%;
 }
 
 /* -------------------------------------------------------------------------- */
@@ -122,7 +142,8 @@ body.cordyceps-introduce-landing #content.site-content .content-area {
 	background: #0a0a0c;
 }
 
-body.cordyceps-introduce-landing .hero-banner {
+body.cordyceps-introduce-landing .hero-banner,
+body.cordyceps-product-landing .hero-banner {
 	width: 100%;
 	max-width: none;
 	margin-left: 0;
