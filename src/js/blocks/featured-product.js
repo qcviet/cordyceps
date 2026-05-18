@@ -1,4 +1,13 @@
-const config = window.cordycepsFeaturedProduct || {}
+const globalConfig = window.cordycepsFeaturedProduct || {}
+
+const getBlockConfig = el => ({
+  ajaxUrl: globalConfig.ajaxUrl || '',
+  nonce: globalConfig.nonce || '',
+  action: globalConfig.action || '',
+  emptyText: globalConfig.emptyText || '',
+  errorText: globalConfig.errorText || '',
+  scope: el.getAttribute('data-fp-scope') || ''
+})
 
 export default el => {
   const tabs = el.querySelectorAll('[data-fp-category]')
@@ -9,6 +18,8 @@ export default el => {
   if (!tabs.length || !grid || !wrapper) {
     return
   }
+
+  const config = getBlockConfig(el)
 
   const setActiveTab = activeButton => {
     tabs.forEach(tab => {
@@ -29,6 +40,7 @@ export default el => {
 
   const loadCategory = async categoryId => {
     if (!config.ajaxUrl || !config.nonce || !config.action) {
+      console.error('featured-product: missing AJAX configuration')
       return
     }
 
@@ -39,7 +51,7 @@ export default el => {
       body.append('action', config.action)
       body.append('nonce', config.nonce)
       body.append('category_id', String(categoryId))
-      body.append('scope_term_ids', el.getAttribute('data-fp-scope') || '')
+      body.append('scope_term_ids', config.scope)
 
       const response = await fetch(config.ajaxUrl, {
         method: 'POST',
@@ -54,9 +66,10 @@ export default el => {
       }
 
       const html = payload.data?.html || ''
-      grid.innerHTML = html || `<p class="fp__empty">${config.emptyText || ''}</p>`
+      grid.innerHTML =
+        html || `<p class="fp__empty">${config.emptyText}</p>`
     } catch (error) {
-      grid.innerHTML = `<p class="fp__empty">${config.errorText || ''}</p>`
+      grid.innerHTML = `<p class="fp__empty">${config.errorText}</p>`
       console.error('featured-product:', error)
     } finally {
       setLoading(false)
@@ -64,10 +77,16 @@ export default el => {
   }
 
   tabs.forEach(tab => {
-    tab.addEventListener('click', () => {
+    tab.addEventListener('click', event => {
+      event.preventDefault()
+
+      if (tab.classList.contains('fp__tab--active')) {
+        return
+      }
+
       const categoryId = tab.getAttribute('data-fp-category')
 
-      if (!categoryId || tab.classList.contains('fp__tab--active')) {
+      if (null === categoryId) {
         return
       }
 
