@@ -78,7 +78,8 @@ body:has(.hero-banner-section) .entry-content:has(.hero-banner-section) {
 
 /* Landing page templates (introduce / product): giữ đồng bộ với :has ở trên */
 body.cordyceps-introduce-landing,
-body.cordyceps-product-landing {
+body.cordyceps-product-landing,
+body.cordyceps-news-landing {
 	#page {
 		--bs-gutter-x: 0;
 		--bs-gutter-y: 0;
@@ -107,7 +108,8 @@ body.cordyceps-product-landing {
 }
 
 body.cordyceps-introduce-landing .introduce-page--hero-landing:has(.hero-banner),
-body.cordyceps-product-landing .product-page--hero-landing:has(.hero-banner) {
+body.cordyceps-product-landing .product-page--hero-landing:has(.hero-banner),
+body.cordyceps-news-landing .news-page--hero-landing:has(.news-page-hero-section) {
 	box-sizing: border-box;
 	width: 100%;
 	max-width: none;
