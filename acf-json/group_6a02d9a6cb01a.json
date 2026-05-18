@@ -554,8 +554,8 @@
                         },
                         {
                             "key": "field_6a0a7c2a32c16",
-                            "label": "Category Product",
-                            "name": "category_product",
+                            "label": "Category Items",
+                            "name": "category_items",
                             "aria-label": "",
                             "type": "taxonomy",
                             "instructions": "",
@@ -577,6 +577,37 @@
                             "multiple": 0,
                             "allow_null": 0,
                             "bidirectional_target": []
+                        }
+                    ],
+                    "min": "",
+                    "max": ""
+                },
+                "layout_6a0a94f613190": {
+                    "key": "layout_6a0a94f613190",
+                    "name": "news_section",
+                    "label": "News Section",
+                    "display": "block",
+                    "sub_fields": [
+                        {
+                            "key": "field_6a0a950613193",
+                            "label": "Title",
+                            "name": "title",
+                            "aria-label": "",
+                            "type": "text",
+                            "instructions": "",
+                            "required": 0,
+                            "conditional_logic": 0,
+                            "wrapper": {
+                                "width": "",
+                                "class": "",
+                                "id": ""
+                            },
+                            "default_value": "",
+                            "maxlength": "",
+                            "allow_in_bindings": 0,
+                            "placeholder": "",
+                            "prepend": "",
+                            "append": ""
                         }
                     ],
                     "min": "",
@@ -606,5 +637,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1779072093
+    "modified": 1779078413
 }
