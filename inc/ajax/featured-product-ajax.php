@@ -13,6 +13,22 @@ if (!defined('ABSPATH')) {
 }
 
 /**
+ * Parse scope term IDs from AJAX POST.
+ *
+ * @return int[]
+ */
+function cordyceps_featured_product_parse_scope_from_request()
+{
+	if (!isset($_POST['scope_term_ids'])) {
+		return [];
+	}
+
+	$scope_raw = sanitize_text_field(wp_unslash((string) $_POST['scope_term_ids']));
+
+	return cordyceps_normalize_featured_product_term_ids($scope_raw);
+}
+
+/**
  * Verify AJAX nonce for featured product requests.
  *
  * @return bool
@@ -39,11 +55,15 @@ function cordyceps_ajax_filter_featured_products()
 	}
 
 	$category_id = isset($_POST['category_id']) ? absint($_POST['category_id']) : 0;
-	$scope_raw = isset($_POST['scope_term_ids']) ? sanitize_text_field(wp_unslash($_POST['scope_term_ids'])) : '';
-	$scope_term_ids = [];
+	$scope_term_ids = cordyceps_featured_product_parse_scope_from_request();
 
-	if ('' !== $scope_raw) {
-		$scope_term_ids = array_filter(array_map('absint', explode(',', $scope_raw)));
+	if ($category_id > 0 && !cordyceps_featured_product_category_is_allowed($category_id, $scope_term_ids)) {
+		wp_send_json_error(
+			[
+				'message' => esc_html__('Category not found.', 'cordyceps'),
+			],
+			404
+		);
 	}
 
 	if ($category_id < 1) {
