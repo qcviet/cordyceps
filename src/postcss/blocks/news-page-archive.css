@@ -1,0 +1,189 @@
+.news-page-archive-section {
+	--news-forest: #0f3b2e;
+	--news-gold: #c89b3c;
+	--news-cream: #f7f3ec;
+
+	box-sizing: border-box;
+	display: block;
+	width: 100%;
+	min-width: 0;
+	max-width: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+.news-page-archive {
+	box-sizing: border-box;
+	width: 100%;
+	background-color: var(--news-cream);
+}
+
+.news-page-archive__inner {
+	box-sizing: border-box;
+	width: 100%;
+	padding-top: clamp(40px, 5vw, 64px);
+	padding-bottom: clamp(48px, 6vw, 80px);
+}
+
+.news-page-archive__grid {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: clamp(20px, 2.5vw, 28px);
+	width: 100%;
+	min-width: 0;
+}
+
+@media (min-width: 600px) {
+	.news-page-archive__grid {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+}
+
+@media (min-width: 992px) {
+	.news-page-archive__grid {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: clamp(24px, 2.2vw, 32px);
+	}
+}
+
+.news-page-archive__empty {
+	margin: 0;
+	padding: clamp(40px, 6vw, 64px) 16px;
+	color: rgb(15 59 46 / 72%);
+	font-family: 'Inter', var(--font-default);
+	font-size: clamp(15px, 1.5vw, 16px);
+}
+
+/* Grid cards: extend news-section card with CTA */
+.news-page-archive .news-section__card {
+	border-radius: 14px;
+	background-color: #fffdf9;
+}
+
+.news-page-archive .news-section__card-body {
+	min-height: clamp(120px, 14vw, 140px);
+	padding-bottom: clamp(16px, 2vw, 20px);
+}
+
+.news-page-card__cta {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	margin-top: auto;
+	padding-top: clamp(8px, 1.2vw, 12px);
+	color: var(--news-gold);
+	font-family: 'Inter', var(--font-default);
+	font-size: clamp(13px, 1.2vw, 14px);
+	font-weight: var(--font-semibold);
+	letter-spacing: 0.04em;
+	text-transform: uppercase;
+	transition:
+		color 0.28s ease,
+		gap 0.28s ease;
+}
+
+.news-page-card__cta-icon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 18px;
+	height: 18px;
+}
+
+.news-page-card__cta-icon svg {
+	display: block;
+	width: 14px;
+	height: 14px;
+}
+
+.news-page-archive .news-section__card:hover .news-page-card__cta {
+	color: var(--news-forest);
+	gap: 12px;
+}
+
+/* Pagination */
+.news-page-pagination.cordyceps-pagination {
+	display: flex;
+	justify-content: center;
+	margin-top: clamp(36px, 4.5vw, 52px);
+}
+
+.news-page-pagination .cordyceps-pagination__list {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+	gap: clamp(8px, 1.2vw, 12px);
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.news-page-pagination .cordyceps-pagination__item {
+	display: flex;
+	margin: 0;
+	padding: 0;
+}
+
+.news-page-pagination .cordyceps-pagination__item a,
+.news-page-pagination .cordyceps-pagination__item span {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	box-sizing: border-box;
+	min-width: 44px;
+	height: 44px;
+	padding: 0 12px;
+	border: 1px solid rgb(15 59 46 / 10%);
+	border-radius: 50%;
+	background-color: #fffdf9;
+	color: var(--news-forest);
+	font-family: 'Inter', var(--font-default);
+	font-size: 14px;
+	font-weight: var(--font-semibold);
+	line-height: 1;
+	text-decoration: none;
+	transition:
+		background-color 0.28s ease,
+		border-color 0.28s ease,
+		color 0.28s ease,
+		box-shadow 0.28s ease,
+		transform 0.28s ease;
+}
+
+.news-page-pagination .cordyceps-pagination__item a:hover {
+	border-color: var(--news-gold);
+	background-color: var(--news-forest);
+	color: #fffdf9;
+	box-shadow: 0 8px 20px rgb(15 59 46 / 12%);
+	transform: translateY(-2px);
+}
+
+.news-page-pagination .cordyceps-pagination__item.is-active span,
+.news-page-pagination .cordyceps-pagination__item.is-active a {
+	border-color: var(--news-gold);
+	background-color: var(--news-gold);
+	color: #fffdf9;
+	box-shadow: 0 8px 22px rgb(200 155 60 / 28%);
+	pointer-events: none;
+}
+
+.news-page-pagination .cordyceps-pagination__item.is-dots span {
+	min-width: auto;
+	border: none;
+	background: transparent;
+	color: rgb(15 59 46 / 45%);
+	font-weight: var(--font-normal);
+}
+
+.news-page-pagination .cordyceps-pagination__item .prev,
+.news-page-pagination .cordyceps-pagination__item .next {
+	padding: 0;
+}
+
+.news-page-pagination .cordyceps-pagination__item .prev svg,
+.news-page-pagination .cordyceps-pagination__item .next svg {
+	display: block;
+	width: 14px;
+	height: 14px;
+}
