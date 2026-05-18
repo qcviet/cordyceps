@@ -41,19 +41,23 @@ class Theme_Init
 
 		add_action('after_setup_theme', [$this, 'theme_supports']);
 
-		add_filter('body_class', [$this, 'body_class_introduce_landing']);
+		add_filter('body_class', [$this, 'body_class_hero_landing']);
 	}
 
 	/**
-	 * Body class for introduce landing template (scoped header / hero styling).
+	 * Body class for page templates that use hero-banner full-bleed layout.
 	 *
 	 * @param string[] $classes
 	 * @return string[]
 	 */
-	public function body_class_introduce_landing($classes)
+	public function body_class_hero_landing($classes)
 	{
 		if (is_page_template('templates/introduce-page.php')) {
 			$classes[] = 'cordyceps-introduce-landing';
+		}
+
+		if (is_page_template('templates/product-page.php')) {
+			$classes[] = 'cordyceps-product-landing';
 		}
 
 		return $classes;
