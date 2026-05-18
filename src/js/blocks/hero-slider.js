@@ -16,7 +16,7 @@ export default el => {
     loop: enableLoop,
     speed: 600,
     watchOverflow: true,
-    autoHeight: true,
+    autoHeight: false,
     modules: [Navigation, Autoplay],
     spaceBetween: 0,
     autoplay: enableLoop
