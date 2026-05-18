@@ -16,6 +16,43 @@
 	margin-bottom: 0;
 	padding-top: 0;
 	padding-bottom: 0;
+	min-width: 0;
+	max-width: 100%;
+	width: 100%;
+	box-sizing: border-box;
+}
+
+/*
+ * Hero full-bleed dùng width:100vw — mặc định flex/grid item có min-width:auto sẽ
+ * lấy min-content ~100vw → ép .content-area / .entry-content vỡ, section sau mất cạnh / cắt nội dung.
+ */
+body:has(.hero-slider-section) .site-content,
+body:has(.hero-slider-section) .site-content .content-area,
+.inside-article:has(.hero-slider-section) {
+	min-width: 0;
+	max-width: 100%;
+	box-sizing: border-box;
+}
+
+/* Cột nội dung flexible: co đúng; hero vẫn tự full-bleed (không giới max-width 100% trên hero) */
+.cordyceps-flexible-sections {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	min-width: 0;
+	box-sizing: border-box;
+}
+
+.cordyceps-flexible-sections > *:not(.hero-slider-section) {
+	min-width: 0;
+	width: 100%;
+	max-width: 100%;
+	box-sizing: border-box;
+}
+
+.cordyceps-flexible-sections > .hero-slider-section {
+	flex-shrink: 0;
+	min-width: 0;
 }
 
 /* Khoảng trắng phía trên header: nền html + reset margin (giữ padding body khi admin bar) */
@@ -47,6 +84,7 @@ body:has(.hero-slider-section) .header {
 .hero-slider-section {
 	box-sizing: border-box;
 	position: relative;
+	z-index: 0;
 	width: 100vw;
 	max-width: 100vw;
 	margin-left: calc(50% - 50vw);
@@ -535,8 +573,8 @@ body:has(.hero-slider-section) .header {
 
 @media (max-width: 991.98px) {
 	.hero-slider {
-		margin-top: -100px;
-		--hero-slider-overlap: clamp(48px, 9vw, 88px);
+		--hero-slider-overlap: clamp(72px, 14vw, 100px);
+		margin-top: calc(-1 * var(--hero-slider-overlap));
 
 		& .hero-slider__item {
 			display: flex;
