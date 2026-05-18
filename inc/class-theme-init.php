@@ -17,6 +17,7 @@ include_once get_theme_file_path('inc/helpers/queries.php');
 include_once get_theme_file_path('inc/helpers/formatting.php');
 include_once get_theme_file_path('inc/helpers/template-tags.php');
 include_once get_theme_file_path('inc/helpers/featured-product.php');
+include_once get_theme_file_path('inc/helpers/news-page.php');
 include_once get_theme_file_path('inc/helpers/debug.php');
 
 require_once get_theme_file_path('inc/ajax/featured-product-ajax.php');
@@ -58,6 +59,10 @@ class Theme_Init
 
 		if (is_page_template('templates/product-page.php')) {
 			$classes[] = 'cordyceps-product-landing';
+		}
+
+		if (is_page_template('templates/news-page.php')) {
+			$classes[] = 'cordyceps-news-landing';
 		}
 
 		return $classes;
