@@ -2,7 +2,8 @@
 
 
 .one-container .site-content:has(.hero-banner),
-.one-container .site-content:has(.hero-banner-section) {
+.one-container .site-content:has(.hero-banner-section),
+.one-container .site-content:has(.product-page--hero-landing) {
 	padding-top: 0;
 	padding-bottom: 0;
 }
