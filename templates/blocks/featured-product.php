@@ -14,13 +14,16 @@ $data = wp_parse_args($args, [
 	'description' => '',
 	'category_items' => [],
 	'category_product' => [],
+	'active_category_id' => 0,
 ]);
 
 $selected_ids = cordyceps_resolve_featured_product_scope_ids($data);
 $tab_categories = cordyceps_get_featured_product_tab_categories($selected_ids);
 $scope_ids = cordyceps_get_featured_product_scope_ids_for_query($tab_categories, $selected_ids);
-$active_id = 0;
-$initial_query = cordyceps_query_all_featured_products($scope_ids);
+$active_id = !empty($data['active_category_id']) ? absint($data['active_category_id']) : 0;
+$initial_query = $active_id > 0
+	? cordyceps_query_featured_products($active_id)
+	: cordyceps_query_all_featured_products($scope_ids);
 $scope_attr = !empty($scope_ids) ? implode(',', $scope_ids) : '';
 
 $_class = 'fp';
