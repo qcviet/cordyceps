@@ -1,5 +1,7 @@
 const SCROLLED_CLASS = 'header--is-scrolled'
 const NAV_OPEN_CLASS = 'header--nav-open'
+const NAV_DRAWER_OPEN_CLASS = 'header__nav--open'
+const OVERLAY_OPEN_CLASS = 'header__overlay--open'
 const HTML_LOCK_CLASS = 'is-header-nav-open'
 const MQ_DRAWER = '(max-width: 1024px)'
 
@@ -44,6 +46,12 @@ export default el => {
 
   const isDrawerMode = () => (mq ? mq.matches : window.innerWidth <= 1023)
 
+  const syncScrollLock = () => {
+    const shouldLock =
+      el.classList.contains(NAV_OPEN_CLASS) && isDrawerMode()
+    document.documentElement.classList.toggle(HTML_LOCK_CLASS, shouldLock)
+  }
+
   const syncNavAccessibility = () => {
     const drawer = isDrawerMode()
     const open = el.classList.contains(NAV_OPEN_CLASS)
@@ -68,7 +76,11 @@ export default el => {
 
   const setNavOpen = open => {
     el.classList.toggle(NAV_OPEN_CLASS, open)
-    document.documentElement.classList.toggle(HTML_LOCK_CLASS, open)
+    nav.classList.toggle(NAV_DRAWER_OPEN_CLASS, open)
+    if (overlay) {
+      overlay.classList.toggle(OVERLAY_OPEN_CLASS, open)
+    }
+    syncScrollLock()
     toggle.setAttribute('aria-expanded', open ? 'true' : 'false')
     const openLabel = toggle.getAttribute('data-label-open') || ''
     const closeLabel = toggle.getAttribute('data-label-close') || ''
@@ -140,6 +152,7 @@ export default el => {
       scrollRaf = 0
       const y = window.scrollY || document.documentElement.scrollTop
       el.classList.toggle(SCROLLED_CLASS, y > 10)
+      syncScrollLock()
     })
   }
 
@@ -153,6 +166,7 @@ export default el => {
     if (!isDrawerMode()) {
       closeNav()
     }
+    syncScrollLock()
     syncNavAccessibility()
   }
 
@@ -181,6 +195,8 @@ export default el => {
       }
       document.documentElement.classList.remove(HTML_LOCK_CLASS)
       el.classList.remove(NAV_OPEN_CLASS, SCROLLED_CLASS)
+      nav.classList.remove(NAV_DRAWER_OPEN_CLASS)
+      overlay && overlay.classList.remove(OVERLAY_OPEN_CLASS)
       nav.removeAttribute('aria-hidden')
       if (supportsInert) {
         nav.inert = false
