@@ -1,0 +1,135 @@
+{
+    "key": "group_6a0postsingle",
+    "title": "Chi tiết bài viết",
+    "fields": [
+        {
+            "key": "field_6a0ps_featured_image",
+            "label": "Ảnh đại diện (ACF)",
+            "name": "featured_image",
+            "aria-label": "",
+            "type": "image",
+            "instructions": "Ưu tiên hơn ảnh đại diện WordPress. Để trống sẽ dùng featured image mặc định.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "library": "all",
+            "min_width": "",
+            "min_height": "",
+            "min_size": "",
+            "max_width": "",
+            "max_height": "",
+            "max_size": "",
+            "mime_types": "",
+            "allow_in_bindings": 0,
+            "preview_size": "medium"
+        },
+        {
+            "key": "field_6a0ps_short_desc",
+            "label": "Mô tả ngắn",
+            "name": "short_desc",
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "Hiển thị dưới tiêu đề (tùy chọn).",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "rows": 3,
+            "placeholder": "",
+            "new_lines": "br"
+        },
+        {
+            "key": "field_6a0ps_share_enable",
+            "label": "Bật chia sẻ",
+            "name": "share_enable",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "33",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 1,
+            "allow_in_bindings": 0,
+            "ui": 1,
+            "ui_on_text": "Bật",
+            "ui_off_text": "Tắt"
+        },
+        {
+            "key": "field_6a0ps_author_name",
+            "label": "Tác giả",
+            "name": "author_name",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "33",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_6a0ps_reading_time",
+            "label": "Thời gian đọc",
+            "name": "reading_time",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Ví dụ: 5 hoặc 5 phút đọc.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "34",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "5 phút đọc",
+            "prepend": "",
+            "append": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "post"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "modified": 1747670400
+}
