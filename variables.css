@@ -83,6 +83,9 @@
 	--luxury-gold-soft: rgb(221 178 77 / 42%);
 	--luxury-forest: #0f2f28;
 	--luxury-forest-soft: rgb(15 47 40 / 78%);
+	--news-forest: #0f3b2e;
+	--news-gold: #c89b3c;
+	--news-cream: #f7f3ec;
 	--header-bg-scrolled: var(--luxury-cream-pale);
 	--header-bg-scrolled-backdrop: rgb(249 246 241 / 90%);
 	--header-bg-overlay: rgb(249 246 241 / 66%);
@@ -96,4 +99,20 @@
 	--header-toggle-bg: rgb(249 246 241 / 72%);
 	--header-toggle-bg-scrolled: rgb(249 246 241 / 82%);
 	--site-header-overlay-scrim: rgb(15 47 40 / 48%);
+	--benefits-fg: #1f3a37;
+	--benefits-gold: #d4a056;
+	--benefits-gold-icon: #e8c992;
+	--benefits-body-muted: #3d524f;
+	--benefits-image-veil-strong: rgb(246 241 231 / 90%);
+	--benefits-image-veil-mid: rgb(255 255 255 / 48%);
+	--benefits-image-veil-soft: rgb(255 255 255 / 14%);
+	--footer-bg-start: #08211c;
+	--footer-bg-end: #08211c;
+	--footer-glow-green: rgb(72 160 130 / 22%);
+	--footer-glow-gold: rgb(185 139 54 / 16%);
+	--footer-border: rgb(255 255 255 / 10%);
+	--footer-border-strong: rgb(255 255 255 / 14%);
+	--footer-text: #ffffff;
+	--footer-text-muted: rgb(255 255 255 / 72%);
+	--footer-heading: var(--luxury-gold-highlight);
 }

@@ -1,4 +1,5 @@
 const path = require('path');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
@@ -110,25 +111,40 @@ module.exports = {
 		new MiniCssExtractPlugin({
 			filename: devMode ? './css/[name].css' : './css/[name].min.css',
 		}),
+		new CopyWebpackPlugin({
+			patterns: [
+				{
+					from: path.resolve(__dirname, 'src/static-assets'),
+					to: path.resolve(__dirname, 'static-assets'),
+				},
+			],
+		}),
 		// Lint CSS.
 		new StyleLintPlugin({
 			context: path.resolve(process.cwd(), './src/postcss/'),
 			files: '**/*.css',
 			failOnError: false,
 		}),
-		new BrowserSyncPlugin({
-			host: 'localhost',
-			port: 3000,
-			watch: true,
-			proxy: {
-				target: 'http://cordyceps.test',
-				proxyReq: [
-					(proxyReq) => {
-						proxyReq.setHeader('X-Cordyceps-Theme-Env', process.env.NODE_ENV);
-					},
-				],
-			},
-		}),
+		...(devMode
+			? [
+					new BrowserSyncPlugin({
+						host: 'localhost',
+						port: 3000,
+						watch: true,
+						proxy: {
+							target: 'http://cordyceps.test',
+							proxyReq: [
+								(proxyReq) => {
+									proxyReq.setHeader(
+										'X-Cordyceps-Theme-Env',
+										process.env.NODE_ENV
+									);
+								},
+							],
+						},
+					}),
+				]
+			: []),
 	],
 	externals: {
 		jQuery: 'jQuery',

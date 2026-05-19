@@ -10,6 +10,7 @@
     "dev": "cross-env BABEL_ENV=default NODE_ENV=development webpack",
     "dev:port": "cross-env BABEL_ENV=default NODE_ENV=development webpack --env port=3100",
     "build": "cross-env BABEL_ENV=default NODE_ENV=production webpack",
+    "build:release": "npm run build",
     "fix": "prettier-standard --format '**/*.{php,js,jsx,css}'",
     "test": "prettier-standard --check '**/*.{php,json,js,jsx,css}'"
   },
