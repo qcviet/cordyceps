@@ -21,6 +21,8 @@ include_once get_theme_file_path('inc/helpers/news-page.php');
 include_once get_theme_file_path('inc/helpers/contact-page.php');
 include_once get_theme_file_path('inc/helpers/product-single.php');
 include_once get_theme_file_path('inc/helpers/product-rewrite.php');
+include_once get_theme_file_path('inc/helpers/product-page.php');
+include_once get_theme_file_path('inc/helpers/nav-menu.php');
 include_once get_theme_file_path('inc/helpers/post-single.php');
 include_once get_theme_file_path('inc/helpers/post-rewrite.php');
 include_once get_theme_file_path('inc/helpers/footer.php');
@@ -63,7 +65,7 @@ class Theme_Init
 			$classes[] = 'cordyceps-introduce-landing';
 		}
 
-		if (is_page_template('templates/product-page.php')) {
+		if (function_exists('cordyceps_is_product_landing_view') && cordyceps_is_product_landing_view()) {
 			$classes[] = 'cordyceps-product-landing';
 		}
 
@@ -170,6 +172,7 @@ class Theme_Init
 		require_once get_theme_file_path('inc/layouts/archive.php');
 		require_once get_theme_file_path('inc/layouts/singular.php');
 		require_once get_theme_file_path('inc/layouts/product-single.php');
+		require_once get_theme_file_path('inc/layouts/product-category.php');
 		require_once get_theme_file_path('inc/layouts/post-single.php');
 		require_once get_theme_file_path('inc/layouts/global.php');
 		require_once get_theme_file_path('inc/layouts/footer.php');
