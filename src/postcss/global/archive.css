@@ -1,4 +1,9 @@
-.archive {
+/* Chỉ archive blog — không áp landing sản phẩm (body.archive từ taxonomy) */
+body.archive:not(.cordyceps-product-landing) {
+	margin-top: 150px;
+}
+
+main.archive {
 	margin-top: 150px;
 }
 
