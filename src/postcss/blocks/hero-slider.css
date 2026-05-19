@@ -573,14 +573,26 @@ body:has(.hero-slider-section) .header {
 
 @media (max-width: 991.98px) {
 	.hero-slider {
-		--hero-slider-overlap: clamp(72px, 14vw, 100px);
-		margin-top: calc(-1 * var(--hero-slider-overlap));
+		--hero-slider-overlap: 0;
+		margin-top: 0;
+		--hs-mobile-media-max: min(52vh, 440px);
+		--hs-mobile-body-min: clamp(300px, 52vw, 400px);
+		--hs-mobile-slide-min: calc(var(--hs-mobile-media-max) + var(--hs-mobile-body-min));
+
+		& .hero-slider__main {
+			height: auto;
+		}
+
+		& .hero-slider__slide {
+			height: 100%;
+			box-sizing: border-box;
+		}
 
 		& .hero-slider__item {
 			display: flex;
 			flex-direction: column;
-			height: auto;
-			min-height: 0;
+			height: 100%;
+			min-height: var(--hs-mobile-slide-min);
 			overflow: visible;
 		}
 
@@ -627,6 +639,7 @@ body:has(.hero-slider-section) .header {
 			top: auto;
 			right: auto;
 			transform: none;
+			flex: 1 1 auto;
 			width: 100%;
 			max-width: none;
 			box-sizing: border-box;
@@ -634,6 +647,7 @@ body:has(.hero-slider-section) .header {
 			margin: 0;
 			text-align: center;
 			justify-items: center;
+			align-content: start;
 			row-gap: 14px;
 			column-gap: 12px;
 			grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -713,6 +727,9 @@ body:has(.hero-slider-section) .header {
 
 @media (max-width: 600px) {
 	.hero-slider {
+		--hs-mobile-media-max: min(46vh, 380px);
+		--hs-mobile-body-min: clamp(280px, 70vw, 360px);
+
 		& .hero-slider__item-media {
 			aspect-ratio: 4 / 3;
 			max-height: min(46vh, 380px);
@@ -783,6 +800,9 @@ body:has(.hero-slider-section) .header {
 
 @media (max-width: 480px) {
 	.hero-slider {
+		--hs-mobile-media-max: min(42vh, 320px);
+		--hs-mobile-body-min: clamp(260px, 75vw, 340px);
+
 		& .hero-slider__item-media {
 			max-height: min(42vh, 320px);
 			min-height: 180px;
