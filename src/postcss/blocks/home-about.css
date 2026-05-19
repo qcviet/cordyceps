@@ -183,6 +183,13 @@
 	transform: translateY(0);
 }
 
+@media (--max-header-drawer) {
+	.home-about__inner {
+		padding-top: clamp(24px, 4vw, 36px);
+		padding-bottom: clamp(24px, 4vh, 40px);
+	}
+}
+
 @media (max-width: 781px) {
 	.home-about__content {
 		max-width: 100%;
