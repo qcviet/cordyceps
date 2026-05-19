@@ -21,6 +21,10 @@ function cordyceps_get_svg_icon($name)
 			$value = '<svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 6l6 6l-6 6" /></svg>';
 			break;
 
+		case 'chevron-down':
+			$value = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M6 9l6 6l6 -6" /></svg>';
+			break;
+
 		case 'plus':
 			$value = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14"/><path d="M5 12h14"/></svg>';
 			break;
@@ -231,8 +235,23 @@ function cordyceps_get_flexible_content_data( $array )
  */
 function cordyceps_get_term_meta($term_object)
 {
+	$url = get_term_link($term_object);
+
+	if (
+		$term_object instanceof WP_Term
+		&& function_exists('cordyceps_get_product_category_link')
+		&& function_exists('cordyceps_product_category_taxonomy')
+		&& cordyceps_product_category_taxonomy() === $term_object->taxonomy
+	) {
+		$category_url = cordyceps_get_product_category_link($term_object);
+
+		if ('' !== $category_url) {
+			$url = $category_url;
+		}
+	}
+
 	return [
-		'url' => get_term_link($term_object),
-		'name' => $term_object->name
+		'url' => $url,
+		'name' => $term_object->name,
 	];
 }
