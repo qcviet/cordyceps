@@ -47,7 +47,7 @@ class Container_Layout
 
     public function content_container_class_open()
     {
-        if (is_singular() || (function_exists('cordyceps_is_product_landing_view') && cordyceps_is_product_landing_view())) {
+        if (is_singular() || is_search() || (function_exists('cordyceps_is_product_landing_view') && cordyceps_is_product_landing_view())) {
             return;
         }
 
@@ -56,7 +56,7 @@ class Container_Layout
 
     public function content_container_class_close()
     {
-        if (is_singular() || (function_exists('cordyceps_is_product_landing_view') && cordyceps_is_product_landing_view())) {
+        if (is_singular() || is_search() || (function_exists('cordyceps_is_product_landing_view') && cordyceps_is_product_landing_view())) {
             return;
         }
 
