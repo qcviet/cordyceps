@@ -40,6 +40,10 @@ class Singular_Layout
 			$post_id = (int) get_the_ID();
 		}
 
+		if ('product' === get_post_type($post_id)) {
+			return $content;
+		}
+
 		if (!function_exists('have_rows') || $post_id < 1 || !have_rows('sections', $post_id)) {
 			return $content;
 		}
