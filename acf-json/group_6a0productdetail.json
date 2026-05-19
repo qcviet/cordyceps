@@ -1,0 +1,169 @@
+{
+    "key": "group_6a0productdetail",
+    "title": "Chi tiết sản phẩm",
+    "fields": [
+        {
+            "key": "field_6a0pd_short_description",
+            "label": "Mô tả ngắn",
+            "name": "short_description",
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "Hiển thị bên phải tiêu đề trên trang chi tiết sản phẩm.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "rows": 4,
+            "placeholder": "",
+            "new_lines": "br"
+        },
+        {
+            "key": "field_6a0pd_social_links",
+            "label": "Liên kết chia sẻ",
+            "name": "social_links",
+            "aria-label": "",
+            "type": "group",
+            "instructions": "URL trang/ kênh mạng xã hội. Để trống sẽ dùng liên kết chia sẻ trang hiện tại.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "layout": "block",
+            "sub_fields": [
+                {
+                    "key": "field_6a0pd_social_facebook",
+                    "label": "Facebook",
+                    "name": "facebook",
+                    "aria-label": "",
+                    "type": "url",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "allow_in_bindings": 0,
+                    "placeholder": "https://"
+                },
+                {
+                    "key": "field_6a0pd_social_zalo",
+                    "label": "Zalo",
+                    "name": "zalo",
+                    "aria-label": "",
+                    "type": "url",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "allow_in_bindings": 0,
+                    "placeholder": "https://"
+                },
+                {
+                    "key": "field_6a0pd_social_messenger",
+                    "label": "Messenger",
+                    "name": "messenger",
+                    "aria-label": "",
+                    "type": "url",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "allow_in_bindings": 0,
+                    "placeholder": "https://"
+                },
+                {
+                    "key": "field_6a0pd_social_telegram",
+                    "label": "Telegram",
+                    "name": "telegram",
+                    "aria-label": "",
+                    "type": "url",
+                    "instructions": "",
+                    "required": 0,
+                    "conditional_logic": 0,
+                    "wrapper": {
+                        "width": "50",
+                        "class": "",
+                        "id": ""
+                    },
+                    "default_value": "",
+                    "allow_in_bindings": 0,
+                    "placeholder": "https://"
+                }
+            ]
+        },
+        {
+            "key": "field_6a0pd_related_products",
+            "label": "Sản phẩm liên quan",
+            "name": "related_products",
+            "aria-label": "",
+            "type": "relationship",
+            "instructions": "Chọn tối đa 4 sản phẩm. Để trống sẽ tự lấy sản phẩm cùng danh mục.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "post_type": [
+                "product"
+            ],
+            "post_status": [
+                "publish"
+            ],
+            "taxonomy": "",
+            "filters": [
+                "search",
+                "taxonomy"
+            ],
+            "return_format": "id",
+            "min": 0,
+            "max": 4,
+            "allow_in_bindings": 0,
+            "elements": "",
+            "bidirectional": 0,
+            "bidirectional_target": []
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "post_type",
+                "operator": "==",
+                "value": "product"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "Trường cho trang chi tiết sản phẩm (PDP).",
+    "show_in_rest": 0,
+    "modified": 1779700000
+}
