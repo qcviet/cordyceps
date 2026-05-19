@@ -47,16 +47,18 @@ class Container_Layout
 
     public function content_container_class_open()
     {
-        if (is_singular())
+        if (is_singular() || (function_exists('cordyceps_is_product_landing_view') && cordyceps_is_product_landing_view())) {
             return;
+        }
 
         echo '<div class="container">';
     }
 
     public function content_container_class_close()
     {
-        if (is_singular())
+        if (is_singular() || (function_exists('cordyceps_is_product_landing_view') && cordyceps_is_product_landing_view())) {
             return;
+        }
 
         echo '</div><!-- End .container -->';
     }
