@@ -41,7 +41,8 @@ body {
 
 	.one-container .site-content:has(.hero-slider-section),
 	.one-container .site-content:has(.hero-banner-section),
-	.one-container .site-content:has(.news-page-hero-section) {
+	.one-container .site-content:has(.news-page-hero-section),
+	.one-container .site-content:has(.product-page--hero-landing) {
 		padding: 0;
 	}
 }
