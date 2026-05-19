@@ -23,6 +23,7 @@ include_once get_theme_file_path('inc/helpers/product-single.php');
 include_once get_theme_file_path('inc/helpers/product-rewrite.php');
 include_once get_theme_file_path('inc/helpers/post-single.php');
 include_once get_theme_file_path('inc/helpers/post-rewrite.php');
+include_once get_theme_file_path('inc/helpers/footer.php');
 include_once get_theme_file_path('inc/helpers/debug.php');
 
 require_once get_theme_file_path('inc/ajax/featured-product-ajax.php');
@@ -171,6 +172,7 @@ class Theme_Init
 		require_once get_theme_file_path('inc/layouts/product-single.php');
 		require_once get_theme_file_path('inc/layouts/post-single.php');
 		require_once get_theme_file_path('inc/layouts/global.php');
+		require_once get_theme_file_path('inc/layouts/footer.php');
 	}
 
 	function theme_supports()
