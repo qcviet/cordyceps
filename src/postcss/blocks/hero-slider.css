@@ -78,7 +78,6 @@ body:has(.hero-slider-section) .site {
 
 body:has(.hero-slider-section) .header {
 	margin-top: 0;
-	padding-top: max(0px, env(safe-area-inset-top, 0px));
 }
 
 .hero-slider-section {
