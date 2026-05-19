@@ -80,7 +80,9 @@ $search_query = get_search_query(false);
 						'menu_class' => 'header__nav-list',
 						'container' => false,
 						'fallback_cb' => false,
-						'depth' => 2,
+						'depth' => function_exists('cordyceps_get_nav_menu_depth')
+							? cordyceps_get_nav_menu_depth('primary')
+							: 3,
 					]);
 					?>
 				</div>
