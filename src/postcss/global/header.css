@@ -77,6 +77,16 @@
 		min-height 0.34s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
+.header .header__toolbar {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) auto;
+	align-items: center;
+	column-gap: clamp(12px, 3vw, 36px);
+	min-width: 0;
+	width: 100%;
+	box-sizing: border-box;
+}
+
 .header.header--is-scrolled .header__inner {
 	padding-block: 8px;
 	min-height: calc(clamp(44px, 4vw, 66px) * 0.88 + 16px);
@@ -457,10 +467,9 @@
 	box-sizing: border-box;
 }
 
-.header.header--nav-open .header__logo,
-.header.header--nav-open .header__actions {
+.header.header--nav-open .header__toolbar {
 	position: relative;
-	z-index: 35;
+	z-index: 50;
 }
 
 .header.header--nav-open:not(.header--is-scrolled) .header__container {
@@ -581,6 +590,10 @@
 		grid-template-columns: minmax(0, auto) minmax(0, 1fr) minmax(0, auto);
 		row-gap: 0;
 		column-gap: clamp(12px, 2.5vw, 28px);
+	}
+
+	.header .header__toolbar {
+		display: contents;
 	}
 
 	.header .header__logo {
@@ -770,6 +783,80 @@
 }
 
 @media (--max-header-drawer) {
+	.header {
+		overflow: visible;
+		padding-top: max(8px, env(safe-area-inset-top, 0px));
+	}
+
+	.admin-bar .header {
+		padding-top: 0;
+	}
+
+	.header .header__inner {
+		display: block;
+		min-height: calc(clamp(40px, 11vw, 52px) + 12px);
+		padding-block: 6px 8px;
+	}
+
+	.header.header--is-scrolled .header__inner {
+		min-height: calc(clamp(38px, 10vw, 48px) + 12px);
+		padding-block: 5px 6px;
+	}
+
+	.header .header__logo img,
+	.header .header__logo .custom-logo {
+		max-height: clamp(40px, 11vw, 52px);
+	}
+
+	.header.header--is-scrolled .header__logo img,
+	.header.header--is-scrolled .header__logo .custom-logo {
+		max-height: clamp(38px, 10vw, 48px);
+	}
+
+	.header .header__toolbar {
+		position: relative;
+		z-index: 50;
+	}
+
+	/*
+	 * Trên mobile chỉ dùng display + transform cho drawer.
+	 * Không kế thừa opacity/visibility: hidden từ rule desktop — dễ làm menu mở vẫn trong suốt.
+	 */
+	.header .header__nav {
+		opacity: 1;
+		visibility: visible;
+		transform: translateX(100%);
+	}
+
+	/* Drawer đóng: gỡ hẳn khỏi layout — tránh lớp fixed che logo/nút/menu */
+	.header__nav:not(.header__nav--open) {
+		display: none;
+		pointer-events: none;
+		will-change: auto;
+	}
+
+	.header__overlay:not(.header__overlay--open) {
+		opacity: 0;
+		visibility: hidden;
+		pointer-events: none;
+	}
+
+	.header__nav.header__nav--open {
+		display: flex;
+		visibility: visible;
+		opacity: 1;
+		pointer-events: auto;
+		transform: translateX(0);
+		z-index: 40;
+		will-change: transform;
+	}
+
+	.header__overlay.header__overlay--open {
+		opacity: 1;
+		visibility: visible;
+		pointer-events: auto;
+	}
+
 	.header .header__nav-list {
 		padding: 20px clamp(20px, 5vw, 32px) 16px;
 	}
@@ -836,7 +923,11 @@
 	}
 }
 
-html.is-header-nav-open,
+html.is-header-nav-open {
+	overflow: hidden;
+	height: 100%;
+}
+
 html.is-header-nav-open body {
 	overflow: hidden;
 	touch-action: none;
