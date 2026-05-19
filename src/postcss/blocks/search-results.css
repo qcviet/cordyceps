@@ -1,0 +1,146 @@
+.search-results-section {
+	--search-forest: #0f3b2e;
+	--search-gold: #c89b3c;
+	--search-cream: #f7f3ec;
+
+	box-sizing: border-box;
+	display: block;
+	width: 100%;
+	min-width: 0;
+	max-width: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+.search-results {
+	box-sizing: border-box;
+	width: 100%;
+	background-color: var(--search-cream);
+}
+
+.search-results__inner {
+	box-sizing: border-box;
+	width: 100%;
+	padding-top: clamp(40px, 5vw, 64px);
+	padding-bottom: clamp(48px, 6vw, 80px);
+}
+
+.search-results__group + .search-results__group--after-products {
+	margin-top: clamp(40px, 5vw, 56px);
+	padding-top: clamp(32px, 4vw, 48px);
+	border-top: 1px solid rgb(15 59 46 / 12%);
+}
+
+.search-results__header {
+	margin-bottom: clamp(20px, 2.8vw, 28px);
+}
+
+.search-results__heading {
+	margin: 0;
+	color: var(--search-forest);
+	font-family: var(--font-heading);
+	font-size: clamp(24px, 3vw, 32px);
+	font-weight: var(--font-semibold);
+	line-height: 1.2;
+	letter-spacing: 0.02em;
+}
+
+.search-results__products.fp__grid {
+	margin: 0;
+}
+
+.search-results__empty {
+	margin: 0;
+	padding: clamp(40px, 6vw, 64px) 16px;
+	color: rgb(15 59 46 / 72%);
+	font-family: 'Inter', var(--font-default);
+	font-size: clamp(15px, 1.5vw, 16px);
+}
+
+.search-results .news-page-archive__grid {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: clamp(20px, 2.5vw, 28px);
+	width: 100%;
+	min-width: 0;
+}
+
+@media (min-width: 600px) {
+	.search-results .news-page-archive__grid {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+}
+
+@media (min-width: 992px) {
+	.search-results .news-page-archive__grid {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: clamp(24px, 2.2vw, 32px);
+	}
+}
+
+.search-results .news-section__card {
+	border-radius: 14px;
+	background-color: #fffdf9;
+}
+
+.search-results-pagination.cordyceps-pagination {
+	display: flex;
+	justify-content: center;
+	margin-top: clamp(32px, 4vw, 48px);
+}
+
+.search-results-pagination .cordyceps-pagination__list {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.search-results-pagination .cordyceps-pagination__item {
+	display: flex;
+}
+
+.search-results-pagination .cordyceps-pagination__item a,
+.search-results-pagination .cordyceps-pagination__item span {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 40px;
+	min-height: 40px;
+	padding: 0 12px;
+	border: 1px solid rgb(15 59 46 / 16%);
+	border-radius: 999px;
+	background-color: #fffdf9;
+	color: var(--search-forest);
+	font-family: 'Inter', var(--font-default);
+	font-size: 14px;
+	font-weight: var(--font-semibold);
+	line-height: 1;
+	text-decoration: none;
+	transition:
+		background-color 0.25s ease,
+		border-color 0.25s ease,
+		color 0.25s ease;
+}
+
+.search-results-pagination .cordyceps-pagination__item a:hover {
+	border-color: var(--search-gold);
+	background-color: rgb(200 155 60 / 12%);
+	color: var(--search-forest);
+}
+
+.search-results-pagination .cordyceps-pagination__item.is-active span,
+.search-results-pagination .cordyceps-pagination__item.is-active a {
+	border-color: var(--search-forest);
+	background-color: var(--search-forest);
+	color: var(--search-cream);
+}
+
+.search-results-pagination .cordyceps-pagination__item.is-dots span {
+	border-color: transparent;
+	background: transparent;
+}
