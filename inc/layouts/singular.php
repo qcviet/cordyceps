@@ -40,7 +40,7 @@ class Singular_Layout
 			$post_id = (int) get_the_ID();
 		}
 
-		if ('product' === get_post_type($post_id)) {
+		if (in_array(get_post_type($post_id), ['product', 'post'], true)) {
 			return $content;
 		}
 
