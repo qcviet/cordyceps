@@ -74,6 +74,8 @@ function cordyceps_is_reserved_product_path($path)
 		cordyceps_product_archive_slug(),
 	];
 
+	$reserved[] = 'tin-tuc';
+
 	return in_array($path, $reserved, true);
 }
 
