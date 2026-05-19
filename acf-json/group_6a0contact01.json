@@ -1,0 +1,210 @@
+{
+    "key": "group_6a0contact01",
+    "title": "Contact Page",
+    "fields": [
+        {
+            "key": "field_6a0contact_title",
+            "label": "Tiêu đề",
+            "name": "contact_title",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "Tiêu đề card thông tin liên hệ.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_6a0contact_address",
+            "label": "Địa chỉ",
+            "name": "contact_address",
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "rows": 3,
+            "placeholder": "",
+            "new_lines": "br"
+        },
+        {
+            "key": "field_6a0contact_phone",
+            "label": "Điện thoại",
+            "name": "contact_phone",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_6a0contact_email",
+            "label": "Email",
+            "name": "contact_email",
+            "aria-label": "",
+            "type": "email",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_6a0contact_facebook",
+            "label": "Facebook",
+            "name": "contact_facebook",
+            "aria-label": "",
+            "type": "url",
+            "instructions": "URL trang Facebook.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "allow_in_bindings": 0,
+            "placeholder": ""
+        },
+        {
+            "key": "field_6a0contact_working_time",
+            "label": "Giờ làm việc",
+            "name": "contact_working_time",
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "rows": 3,
+            "placeholder": "",
+            "new_lines": "br"
+        },
+        {
+            "key": "field_6a0contact_brochure",
+            "label": "Brochure (file)",
+            "name": "contact_brochure_file",
+            "aria-label": "",
+            "type": "file",
+            "instructions": "File PDF hoặc tài liệu tải về.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "50",
+                "class": "",
+                "id": ""
+            },
+            "return_format": "array",
+            "library": "all",
+            "min_size": "",
+            "max_size": "",
+            "mime_types": "pdf,doc,docx",
+            "allow_in_bindings": 0
+        },
+        {
+            "key": "field_6a0contact_map",
+            "label": "Google Map (iframe)",
+            "name": "contact_map_iframe",
+            "aria-label": "",
+            "type": "textarea",
+            "instructions": "Dán mã embed iframe từ Google Maps.",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "rows": 4,
+            "placeholder": "<iframe src=\"...\" ...></iframe>",
+            "new_lines": ""
+        },
+        {
+            "key": "field_6a0contact_form_id",
+            "label": "Contact Form 7 ID",
+            "name": "contact_form_id",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "ID form CF7 (số hoặc hash trong shortcode).",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "allow_in_bindings": 0,
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "page_template",
+                "operator": "==",
+                "value": "templates/contact-page.php"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "Nội dung trang Liên hệ — info card, map, form CF7.",
+    "show_in_rest": 0,
+    "modified": 1779300000
+}
