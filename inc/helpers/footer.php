@@ -383,13 +383,17 @@ function cordyceps_render_footer_link_list(array $links, $class = 'site-footer__
 function cordyceps_render_footer_nav_column($theme_location, $acf_field, $fallback_cb)
 {
 	if (has_nav_menu($theme_location)) {
+		$depth = function_exists('cordyceps_get_nav_menu_depth')
+			? cordyceps_get_nav_menu_depth($theme_location)
+			: 1;
+
 		wp_nav_menu(
 			[
 				'theme_location' => $theme_location,
 				'menu_class' => 'site-footer__menu',
 				'container' => false,
 				'fallback_cb' => false,
-				'depth' => 1,
+				'depth' => $depth,
 				'item_spacing' => 'discard',
 			]
 		);
@@ -568,22 +572,51 @@ function cordyceps_get_footer_pages_fallback_links()
  */
 function cordyceps_get_footer_products_fallback_links()
 {
+	$taxonomy = function_exists('cordyceps_featured_product_taxonomy')
+		? cordyceps_featured_product_taxonomy()
+		: 'product-category';
+
+	$terms = get_terms(
+		[
+			'taxonomy' => $taxonomy,
+			'hide_empty' => true,
+			'parent' => 0,
+			'orderby' => 'menu_order',
+			'order' => 'ASC',
+		]
+	);
+
+	$links = [];
+
+	if (!is_wp_error($terms) && !empty($terms)) {
+		foreach ($terms as $term) {
+			if (!$term instanceof WP_Term) {
+				continue;
+			}
+
+			$url = function_exists('cordyceps_get_product_category_link')
+				? cordyceps_get_product_category_link($term)
+				: get_term_link($term);
+
+			if (is_wp_error($url) || '' === $url) {
+				continue;
+			}
+
+			$links[] = [
+				'url' => $url,
+				'label' => $term->name,
+			];
+		}
+	}
+
+	if (!empty($links)) {
+		return $links;
+	}
+
 	return [
 		[
 			'url' => home_url('/san-pham/'),
-			'label' => __('Đông trùng hạ thảo tươi', 'cordyceps'),
-		],
-		[
-			'url' => home_url('/san-pham/'),
-			'label' => __('Đông trùng hạ thảo khô', 'cordyceps'),
-		],
-		[
-			'url' => home_url('/san-pham/'),
-			'label' => __('Đông trùng hạ thảo viên', 'cordyceps'),
-		],
-		[
-			'url' => home_url('/san-pham/'),
-			'label' => __('Quà tặng sức khỏe', 'cordyceps'),
+			'label' => __('Sản phẩm', 'cordyceps'),
 		],
 	];
 }
