@@ -3,6 +3,8 @@ const NAV_OPEN_CLASS = 'header--nav-open'
 const NAV_DRAWER_OPEN_CLASS = 'header__nav--open'
 const OVERLAY_OPEN_CLASS = 'header__overlay--open'
 const HTML_LOCK_CLASS = 'is-header-nav-open'
+const SUBMENU_OPEN_CLASS = 'header__submenu-open'
+const SUBMENU_CLOSE_DELAY_MS = 160
 const MQ_DRAWER = '(max-width: 1024px)'
 
 const supportsInert = typeof HTMLElement !== 'undefined' && 'inert' in HTMLElement.prototype
@@ -156,6 +158,113 @@ export default el => {
     })
   }
 
+  const parentItems = () =>
+    [...nav.querySelectorAll('.header__nav-list > .menu-item-has-children')]
+
+  const submenuCloseTimers = new WeakMap()
+
+  const clearSubmenuCloseTimer = item => {
+    const timer = submenuCloseTimers.get(item)
+    if (timer) {
+      window.clearTimeout(timer)
+      submenuCloseTimers.delete(item)
+    }
+  }
+
+  const closeDesktopSubmenus = exceptItem => {
+    parentItems().forEach(item => {
+      clearSubmenuCloseTimer(item)
+      if (exceptItem && item === exceptItem) {
+        return
+      }
+      item.classList.remove(SUBMENU_OPEN_CLASS)
+      const link = item.querySelector(':scope > a')
+      link?.setAttribute('aria-expanded', 'false')
+    })
+  }
+
+  const scheduleCloseDesktopSubmenu = item => {
+    clearSubmenuCloseTimer(item)
+    submenuCloseTimers.set(
+      item,
+      window.setTimeout(() => {
+        submenuCloseTimers.delete(item)
+        item.classList.remove(SUBMENU_OPEN_CLASS)
+        item.querySelector(':scope > a')?.setAttribute('aria-expanded', 'false')
+      }, SUBMENU_CLOSE_DELAY_MS)
+    )
+  }
+
+  const openDesktopSubmenu = item => {
+    const link = item.querySelector(':scope > a')
+    clearSubmenuCloseTimer(item)
+    closeDesktopSubmenus(item)
+    item.classList.add(SUBMENU_OPEN_CLASS)
+    link?.setAttribute('aria-expanded', 'true')
+  }
+
+  const bindDesktopSubmenus = () => {
+    parentItems().forEach(item => {
+      const link = item.querySelector(':scope > a')
+      const submenu = item.querySelector(':scope > .sub-menu')
+
+      if (!link || !submenu) {
+        return
+      }
+
+      link.setAttribute('aria-haspopup', 'true')
+      link.setAttribute('aria-expanded', 'false')
+
+      const onEnter = () => {
+        if (isDrawerMode()) {
+          return
+        }
+        openDesktopSubmenu(item)
+      }
+
+      const onLeave = event => {
+        if (isDrawerMode()) {
+          return
+        }
+        if (event.relatedTarget instanceof Node && item.contains(event.relatedTarget)) {
+          return
+        }
+        scheduleCloseDesktopSubmenu(item)
+      }
+
+      item.addEventListener('mouseenter', onEnter)
+      item.addEventListener('mouseleave', onLeave)
+      submenu.addEventListener('mouseenter', onEnter)
+      submenu.addEventListener('mouseleave', onLeave)
+
+      link.addEventListener('click', event => {
+        if (isDrawerMode()) {
+          return
+        }
+
+        if (!item.classList.contains(SUBMENU_OPEN_CLASS)) {
+          event.preventDefault()
+          openDesktopSubmenu(item)
+        }
+      })
+    })
+
+    document.addEventListener('click', event => {
+      if (isDrawerMode()) {
+        return
+      }
+      if (
+        event.target instanceof Node &&
+        event.target.closest('.header__nav-list > .menu-item-has-children')
+      ) {
+        return
+      }
+      closeDesktopSubmenus()
+    })
+  }
+
+  bindDesktopSubmenus()
+
   toggle.addEventListener('click', onToggleClick)
   overlay && overlay.addEventListener('click', onOverlayClick)
   nav.addEventListener('click', onNavClick)
@@ -165,6 +274,8 @@ export default el => {
   const onMqChange = () => {
     if (!isDrawerMode()) {
       closeNav()
+    } else {
+      closeDesktopSubmenus()
     }
     syncScrollLock()
     syncNavAccessibility()
