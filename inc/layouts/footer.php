@@ -71,6 +71,14 @@ class Footer_Layout
 
 		$classes[] = 'site-footer__menu-item';
 
+		if ($depth > 0) {
+			$classes[] = 'site-footer__menu-item--child';
+		}
+
+		if (in_array('menu-item-has-children', $classes, true)) {
+			$classes[] = 'site-footer__menu-item--parent';
+		}
+
 		return $classes;
 	}
 
