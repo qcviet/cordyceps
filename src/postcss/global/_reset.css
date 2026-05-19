@@ -32,3 +32,16 @@ body {
 .container-fluid .site-content .content-area {
 	max-width: 100%;
 }
+
+/* GP mặc định padding 40px — trên mobile thu gọn, trừ trang hero full-bleed */
+@media (--max-header-drawer) {
+	.one-container .site-content {
+		padding: 16px max(16px, min(5vw, 24px)) 28px;
+	}
+
+	.one-container .site-content:has(.hero-slider-section),
+	.one-container .site-content:has(.hero-banner-section),
+	.one-container .site-content:has(.news-page-hero-section) {
+		padding: 0;
+	}
+}
