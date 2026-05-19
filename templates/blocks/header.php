@@ -24,14 +24,32 @@ $search_query = get_search_query(false);
 	<div class="<?php echo esc_attr(cordyceps_get_header_container_classes()); ?>">
 		<div class="header__inner">
 
-			<div class="header__logo">
-				<?php if (has_custom_logo()) : ?>
-					<?php the_custom_logo(); ?>
-				<?php else : ?>
-					<a href="<?php echo esc_url(home_url('/')); ?>" class="header__logo-link" rel="home">
-						<span class="header__logo-text"><?php bloginfo('name'); ?></span>
-					</a>
-				<?php endif; ?>
+			<div class="header__toolbar">
+				<div class="header__logo">
+					<?php if (has_custom_logo()) : ?>
+						<?php the_custom_logo(); ?>
+					<?php else : ?>
+						<a href="<?php echo esc_url(home_url('/')); ?>" class="header__logo-link" rel="home">
+							<span class="header__logo-text"><?php bloginfo('name'); ?></span>
+						</a>
+					<?php endif; ?>
+				</div>
+
+				<div class="header__actions">
+					<div class="header__hotline">
+						<a class="header__hotline-link" href="<?php echo esc_url($hotline_href); ?>" aria-label="<?php echo esc_attr($hotline_aria); ?>">
+							<span class="header__hotline-icon" aria-hidden="true"><?php echo cordyceps_get_svg_icon('phone'); ?></span>
+							<span class="header__hotline-label"><?php echo esc_html($hotline_label); ?></span>
+						</a>
+					</div>
+
+					<button type="button" class="header__menu-toggle" aria-controls="site-header-navigation" aria-expanded="false" aria-label="<?php echo esc_attr__('Mở menu điều hướng', 'cordyceps'); ?>" data-label-open="<?php echo esc_attr__('Mở menu điều hướng', 'cordyceps'); ?>" data-label-close="<?php echo esc_attr__('Đóng menu điều hướng', 'cordyceps'); ?>" data-header-menu-toggle>
+						<span class="header__menu-toggle-icons" aria-hidden="true">
+							<span class="header__menu-toggle-icon header__menu-toggle-icon--open"><?php echo cordyceps_get_svg_icon('menu'); ?></span>
+							<span class="header__menu-toggle-icon header__menu-toggle-icon--close"><?php echo cordyceps_get_svg_icon('close'); ?></span>
+						</span>
+					</button>
+				</div>
 			</div>
 
 			<nav id="site-header-navigation" class="header__nav" aria-label="<?php echo esc_attr__('Primary navigation', 'cordyceps'); ?>">
@@ -67,22 +85,6 @@ $search_query = get_search_query(false);
 					?>
 				</div>
 			</nav>
-
-			<div class="header__actions">
-				<div class="header__hotline">
-					<a class="header__hotline-link" href="<?php echo esc_url($hotline_href); ?>" aria-label="<?php echo esc_attr($hotline_aria); ?>">
-						<span class="header__hotline-icon" aria-hidden="true"><?php echo cordyceps_get_svg_icon('phone'); ?></span>
-						<span class="header__hotline-label"><?php echo esc_html($hotline_label); ?></span>
-					</a>
-				</div>
-
-				<button type="button" class="header__menu-toggle" aria-controls="site-header-navigation" aria-expanded="false" aria-label="<?php echo esc_attr__('Mở menu điều hướng', 'cordyceps'); ?>" data-label-open="<?php echo esc_attr__('Mở menu điều hướng', 'cordyceps'); ?>" data-label-close="<?php echo esc_attr__('Đóng menu điều hướng', 'cordyceps'); ?>" data-header-menu-toggle>
-					<span class="header__menu-toggle-icons" aria-hidden="true">
-						<span class="header__menu-toggle-icon header__menu-toggle-icon--open"><?php echo cordyceps_get_svg_icon('menu'); ?></span>
-						<span class="header__menu-toggle-icon header__menu-toggle-icon--close"><?php echo cordyceps_get_svg_icon('close'); ?></span>
-					</span>
-				</button>
-			</div>
 
 		</div>
 	</div>
