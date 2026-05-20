@@ -364,6 +364,10 @@ function cordyceps_render_footer_link_list(array $links, $class = 'site-footer__
 
 	echo '<ul class="' . esc_attr($class) . '">';
 	foreach ($links as $link) {
+		if (empty($link['url'])) {
+			continue;
+		}
+
 		printf(
 			'<li class="site-footer__menu-item"><a class="site-footer__menu-link" href="%1$s">%2$s</a></li>',
 			esc_url($link['url']),
@@ -541,7 +545,7 @@ function cordyceps_get_footer_copyright_text()
  */
 function cordyceps_get_footer_pages_fallback_links()
 {
-	return [
+	$links = [
 		[
 			'url' => home_url('/'),
 			'label' => __('Trang chủ', 'cordyceps'),
@@ -550,19 +554,27 @@ function cordyceps_get_footer_pages_fallback_links()
 			'url' => home_url('/gioi-thieu/'),
 			'label' => __('Giới thiệu', 'cordyceps'),
 		],
-		[
-			'url' => home_url('/san-pham/'),
-			'label' => __('Sản phẩm', 'cordyceps'),
-		],
-		[
-			'url' => home_url('/tin-tuc/'),
-			'label' => __('Tin tức', 'cordyceps'),
-		],
-		[
-			'url' => home_url('/lien-he/'),
-			'label' => __('Liên hệ', 'cordyceps'),
-		],
 	];
+
+	$product_url = function_exists('cordyceps_get_product_page_url') ? cordyceps_get_product_page_url() : '';
+
+	if ('' !== $product_url) {
+		$links[] = [
+			'url' => $product_url,
+			'label' => __('Sản phẩm', 'cordyceps'),
+		];
+	}
+
+	$links[] = [
+		'url' => home_url('/tin-tuc/'),
+		'label' => __('Tin tức', 'cordyceps'),
+	];
+	$links[] = [
+		'url' => home_url('/lien-he/'),
+		'label' => __('Liên hệ', 'cordyceps'),
+	];
+
+	return $links;
 }
 
 /**
@@ -613,9 +625,15 @@ function cordyceps_get_footer_products_fallback_links()
 		return $links;
 	}
 
+	$product_url = function_exists('cordyceps_get_product_page_url') ? cordyceps_get_product_page_url() : '';
+
+	if ('' === $product_url) {
+		return [];
+	}
+
 	return [
 		[
-			'url' => home_url('/san-pham/'),
+			'url' => $product_url,
 			'label' => __('Sản phẩm', 'cordyceps'),
 		],
 	];

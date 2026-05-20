@@ -51,6 +51,48 @@ function cordyceps_get_product_landing_page_id()
 }
 
 /**
+ * Canonical URL for the product listing page (WP page with Product Page template).
+ *
+ * @return string Permalink or empty if no landing page is configured.
+ */
+function cordyceps_get_product_page_url()
+{
+	$page_id = cordyceps_get_product_landing_page_id();
+
+	if ($page_id <= 0) {
+		return '';
+	}
+
+	$url = get_permalink($page_id);
+
+	if (!$url || is_wp_error($url)) {
+		return '';
+	}
+
+	return $url;
+}
+
+/**
+ * Product archive links should point at the landing page, not CPT /san-pham/.
+ *
+ * @param string $link     Archive URL.
+ * @param string $post_type Post type name.
+ * @return string
+ */
+function cordyceps_filter_product_post_type_archive_link($link, $post_type)
+{
+	if ('product' !== $post_type) {
+		return $link;
+	}
+
+	$page_url = cordyceps_get_product_page_url();
+
+	return '' !== $page_url ? $page_url : $link;
+}
+
+add_filter('post_type_archive_link', 'cordyceps_filter_product_post_type_archive_link', 10, 2);
+
+/**
  * Render product landing flexible sections (hero + featured products).
  *
  * @param array<string, mixed> $context Optional: active_category_id (int).

@@ -68,6 +68,78 @@ function cordyceps_setup_nav_menu_item_product_category($menu_item)
 add_filter('wp_setup_nav_menu_item', 'cordyceps_setup_nav_menu_item_product_category', 20);
 
 /**
+ * Product archive menu items → Product Page permalink (not /san-pham/).
+ *
+ * @param object $menu_item Nav menu item.
+ * @return object
+ */
+function cordyceps_setup_nav_menu_item_product_archive($menu_item)
+{
+	if (
+		!is_object($menu_item)
+		|| empty($menu_item->type)
+		|| 'post_type_archive' !== $menu_item->type
+		|| empty($menu_item->object)
+		|| 'product' !== $menu_item->object
+		|| !function_exists('cordyceps_get_product_page_url')
+	) {
+		return $menu_item;
+	}
+
+	$url = cordyceps_get_product_page_url();
+
+	if ('' !== $url) {
+		$menu_item->url = $url;
+	}
+
+	return $menu_item;
+}
+
+add_filter('wp_setup_nav_menu_item', 'cordyceps_setup_nav_menu_item_product_archive', 20);
+
+/**
+ * Custom menu links still pointing at legacy /san-pham/ archive → Product Page.
+ *
+ * @param object $menu_item Nav menu item.
+ * @return object
+ */
+function cordyceps_setup_nav_menu_item_legacy_product_archive_url($menu_item)
+{
+	if (
+		!is_object($menu_item)
+		|| empty($menu_item->type)
+		|| 'custom' !== $menu_item->type
+		|| empty($menu_item->url)
+		|| !function_exists('cordyceps_product_archive_slug')
+		|| !function_exists('cordyceps_get_product_page_url')
+	) {
+		return $menu_item;
+	}
+
+	$path = wp_parse_url($menu_item->url, PHP_URL_PATH);
+
+	if (!is_string($path)) {
+		return $menu_item;
+	}
+
+	$path = trim($path, '/');
+
+	if (cordyceps_product_archive_slug() !== $path) {
+		return $menu_item;
+	}
+
+	$url = cordyceps_get_product_page_url();
+
+	if ('' !== $url) {
+		$menu_item->url = $url;
+	}
+
+	return $menu_item;
+}
+
+add_filter('wp_setup_nav_menu_item', 'cordyceps_setup_nav_menu_item_legacy_product_archive_url', 20);
+
+/**
  * Show "Category" (product-category) panel on Menus screen if user hid it.
  */
 function cordyceps_ensure_product_category_menu_panel()

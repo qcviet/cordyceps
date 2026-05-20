@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Product CPT rewrite: single at root (/ten-san-pham/), archive at /san-pham/.
+ * Product CPT rewrite: single at root (/ten-san-pham/). Listing uses WP page (Product Page template).
  *
  * @package cordyceps
  * @author biogreen
@@ -17,7 +17,7 @@ if (!defined('ABSPATH')) {
  */
 function cordyceps_product_rewrite_version()
 {
-	return '8';
+	return '9';
 }
 
 /**
@@ -155,7 +155,8 @@ function cordyceps_filter_product_post_type_args($args, $post_type)
 		return $args;
 	}
 
-	$args['has_archive'] = cordyceps_product_archive_slug();
+	// Listing lives on a Page (templates/product-page.php), not a CPT archive.
+	$args['has_archive'] = false;
 	$args['publicly_queryable'] = true;
 	$args['public'] = true;
 	$args['query_var'] = 'product';
@@ -655,3 +656,37 @@ function cordyceps_redirect_legacy_product_category_urls()
 }
 
 add_action('template_redirect', 'cordyceps_redirect_legacy_product_category_urls', 1);
+
+/**
+ * Redirect legacy CPT archive /san-pham/ to the Product Page.
+ */
+function cordyceps_redirect_product_archive_to_landing_page()
+{
+	if (is_admin()) {
+		return;
+	}
+
+	global $wp;
+
+	$path = isset($wp->request) ? trim((string) $wp->request, '/') : '';
+	$archive_slug = cordyceps_product_archive_slug();
+
+	if ($archive_slug !== $path) {
+		return;
+	}
+
+	if (!function_exists('cordyceps_get_product_page_url')) {
+		return;
+	}
+
+	$target = cordyceps_get_product_page_url();
+
+	if ('' === $target) {
+		return;
+	}
+
+	wp_safe_redirect($target, 301);
+	exit;
+}
+
+add_action('template_redirect', 'cordyceps_redirect_product_archive_to_landing_page', 1);
