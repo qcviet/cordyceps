@@ -658,11 +658,15 @@ function cordyceps_redirect_legacy_product_category_urls()
 add_action('template_redirect', 'cordyceps_redirect_legacy_product_category_urls', 1);
 
 /**
- * Redirect legacy CPT archive /san-pham/ to the Product Page.
+ * Redirect legacy CPT archive /san-pham/ to the Product Page (only when not already there).
  */
 function cordyceps_redirect_product_archive_to_landing_page()
 {
 	if (is_admin()) {
+		return;
+	}
+
+	if (is_page_template('templates/product-page.php')) {
 		return;
 	}
 
@@ -675,6 +679,13 @@ function cordyceps_redirect_product_archive_to_landing_page()
 		return;
 	}
 
+	// A published page already uses this slug (e.g. landing at /san-pham/) — do not redirect.
+	$existing_page = get_page_by_path($path, OBJECT, 'page');
+
+	if ($existing_page instanceof WP_Post && 'publish' === $existing_page->post_status) {
+		return;
+	}
+
 	if (!function_exists('cordyceps_get_product_page_url')) {
 		return;
 	}
@@ -683,6 +694,16 @@ function cordyceps_redirect_product_archive_to_landing_page()
 
 	if ('' === $target) {
 		return;
+	}
+
+	$target_path = wp_parse_url($target, PHP_URL_PATH);
+
+	if (is_string($target_path)) {
+		$target_path = trim($target_path, '/');
+
+		if ($target_path === $path) {
+			return;
+		}
 	}
 
 	wp_safe_redirect($target, 301);
