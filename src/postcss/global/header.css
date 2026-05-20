@@ -849,6 +849,31 @@
 	.header {
 		overflow: visible;
 		padding-top: max(8px, env(safe-area-inset-top, 0px));
+		/* Không animate backdrop-filter trên mobile — tránh frame lỗi + layer WebKit. */
+		transition:
+			background-color 0.38s cubic-bezier(0.22, 1, 0.36, 1),
+			box-shadow 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+	}
+
+	/*
+	 * Safari iOS / WebKit: backdrop-filter trên ancestor tạo containing block cho position:fixed.
+	 * Trên drawer, .header__overlay và .header__nav dùng fixed + inset — nếu neo theo ô header
+	 * (chỉ vài chục px cao) sẽ lệch layer, có thể mất header, chặn touch, cuộn đơ.
+	 * Tắt blur trên bar khi scrolled; overlay xem rule riêng (cũng tắt blur trên mobile).
+	 */
+	.header.header--is-scrolled {
+		backdrop-filter: none;
+		-webkit-backdrop-filter: none;
+	}
+
+	/*
+	 * Cùng lý do bar scrolled: backdrop-filter + fixed full viewport trên iOS dễ tạo lớp trong suốt
+	 * vẫn bắt touch hoặc “nuốt” header sau khi bấm. Dùng nền đặc gần tương đương scrim có blur.
+	 */
+	.header .header__overlay {
+		backdrop-filter: none;
+		-webkit-backdrop-filter: none;
+		background: rgb(15 47 40 / 66%);
 	}
 
 	.admin-bar .header {
@@ -879,6 +904,33 @@
 	.header .header__toolbar {
 		position: relative;
 		z-index: 50;
+	}
+
+	/*
+	 * WebKit (Safari responsive / iOS): panel fixed + transform đôi khi composite trên toolbar
+	 * → mất logo & nút X. Neo toolbar lên viewport, z-index rất cao, nền đặc để luôn dùng được.
+	 */
+	.header.header--nav-open .header__toolbar {
+		position: fixed;
+		left: 0;
+		right: 0;
+		top: max(8px, env(safe-area-inset-top, 0px));
+		z-index: 10060;
+		box-sizing: border-box;
+		padding-inline: max(16px, min(5vw, 24px));
+		padding-block: 6px 8px;
+		background: rgb(249 246 241 / 98%);
+		border-bottom: 1px solid rgb(15 47 40 / 8%);
+	}
+
+	.admin-bar .header.header--nav-open .header__toolbar {
+		top: 46px;
+	}
+
+	@media (min-width: 783px) {
+		.admin-bar .header.header--nav-open .header__toolbar {
+			top: 32px;
+		}
 	}
 
 	/*

@@ -5,7 +5,8 @@ const OVERLAY_OPEN_CLASS = 'header__overlay--open'
 const HTML_LOCK_CLASS = 'is-header-nav-open'
 const SUBMENU_OPEN_CLASS = 'header__submenu-open'
 const SUBMENU_CLOSE_DELAY_MS = 160
-const MQ_DRAWER = '(max-width: 1024px)'
+/** Khớp `--max-header-drawer` trong CSS (1023px) — lệch 1px khiến JS/CSS khác layout. */
+const MQ_DRAWER = '(max-width: 1023px)'
 
 const supportsInert = typeof HTMLElement !== 'undefined' && 'inert' in HTMLElement.prototype
 
@@ -47,6 +48,18 @@ export default el => {
   let lastFocus = null
 
   const isDrawerMode = () => (mq ? mq.matches : window.innerWidth <= 1023)
+
+  /** Gỡ trạng thái drawer/scroll-lock khi menu đã đóng — tránh Safari kẹt lớp + touch-action: none. */
+  const healDrawerClosedIfNeeded = () => {
+    if (el.classList.contains(NAV_OPEN_CLASS)) {
+      return
+    }
+    document.documentElement.classList.remove(HTML_LOCK_CLASS)
+    nav.classList.remove(NAV_DRAWER_OPEN_CLASS)
+    if (overlay) {
+      overlay.classList.remove(OVERLAY_OPEN_CLASS)
+    }
+  }
 
   const syncScrollLock = () => {
     const shouldLock =
@@ -152,9 +165,15 @@ export default el => {
     if (scrollRaf) return
     scrollRaf = window.requestAnimationFrame(() => {
       scrollRaf = 0
-      const y = window.scrollY || document.documentElement.scrollTop
+      const y =
+        window.scrollY ||
+        window.pageYOffset ||
+        document.documentElement.scrollTop ||
+        document.body.scrollTop ||
+        0
       el.classList.toggle(SCROLLED_CLASS, y > 10)
       syncScrollLock()
+      healDrawerClosedIfNeeded()
     })
   }
 
@@ -265,11 +284,18 @@ export default el => {
 
   bindDesktopSubmenus()
 
+  const onPageShow = () => {
+    healDrawerClosedIfNeeded()
+    syncScrollLock()
+    syncNavAccessibility()
+  }
+
   toggle.addEventListener('click', onToggleClick)
   overlay && overlay.addEventListener('click', onOverlayClick)
   nav.addEventListener('click', onNavClick)
   document.addEventListener('keydown', onDocumentKeydown)
   window.addEventListener('scroll', onScroll, { passive: true })
+  window.addEventListener('pageshow', onPageShow)
 
   const onMqChange = () => {
     if (!isDrawerMode()) {
@@ -279,6 +305,7 @@ export default el => {
     }
     syncScrollLock()
     syncNavAccessibility()
+    healDrawerClosedIfNeeded()
   }
 
   if (mq && mq.addEventListener) {
@@ -287,6 +314,7 @@ export default el => {
     mq.addListener(onMqChange)
   }
 
+  healDrawerClosedIfNeeded()
   onScroll()
   syncNavAccessibility()
 
@@ -299,6 +327,7 @@ export default el => {
       nav.removeEventListener('click', onNavClick)
       document.removeEventListener('keydown', onDocumentKeydown)
       window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('pageshow', onPageShow)
       if (mq && mq.removeEventListener) {
         mq.removeEventListener('change', onMqChange)
       } else if (mq && mq.removeListener) {
