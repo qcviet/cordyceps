@@ -82,6 +82,10 @@ class Theme_Init
 			$classes[] = 'cordyceps-contact-landing';
 		}
 
+		if (is_singular('page') && function_exists('cordyceps_page_has_hero_slider_section') && cordyceps_page_has_hero_slider_section()) {
+			$classes[] = 'cordyceps-flexible-hero';
+		}
+
 		if (is_singular('product')) {
 			$classes[] = 'cordyceps-product-single';
 		}
@@ -175,6 +179,7 @@ class Theme_Init
 		require_once get_theme_file_path('inc/layouts/product-single.php');
 		require_once get_theme_file_path('inc/layouts/product-category.php');
 		require_once get_theme_file_path('inc/layouts/search.php');
+		require_once get_theme_file_path('inc/layouts/flexible-page.php');
 		require_once get_theme_file_path('inc/layouts/post-single.php');
 		require_once get_theme_file_path('inc/layouts/global.php');
 		require_once get_theme_file_path('inc/layouts/footer.php');

@@ -80,6 +80,12 @@ body:has(.hero-slider-section) .header {
 	margin-top: 0;
 }
 
+/* GP vẫn in entry-header (tiêu đề trang) trước flexible — gây dải trắng trên hosting */
+.inside-article:has(.hero-slider-section) > .entry-header,
+body.cordyceps-flexible-hero .entry-header {
+	display: none;
+}
+
 .hero-slider-section {
 	box-sizing: border-box;
 	position: relative;

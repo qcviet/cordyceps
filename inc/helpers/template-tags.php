@@ -255,3 +255,40 @@ function cordyceps_get_term_meta($term_object)
 		'name' => $term_object->name,
 	];
 }
+
+/**
+ * Whether a page uses flexible sections with a hero slider block.
+ *
+ * @param int $post_id Page ID; defaults to queried object.
+ * @return bool
+ */
+function cordyceps_page_has_hero_slider_section($post_id = 0)
+{
+	if (!function_exists('get_field')) {
+		return false;
+	}
+
+	$post_id = $post_id > 0 ? (int) $post_id : (int) get_queried_object_id();
+
+	if ($post_id < 1) {
+		return false;
+	}
+
+	$sections = get_field('sections', $post_id);
+
+	if (!is_array($sections)) {
+		return false;
+	}
+
+	foreach ($sections as $section) {
+		if (!is_array($section)) {
+			continue;
+		}
+
+		if (isset($section['acf_fc_layout']) && 'hero_slider' === $section['acf_fc_layout']) {
+			return true;
+		}
+	}
+
+	return false;
+}
