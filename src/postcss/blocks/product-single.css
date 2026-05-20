@@ -466,7 +466,7 @@ body.cordyceps-product-single .inside-article {
 }
 
 .product-related__card.fp__card {
-	border-radius: 18px;
+	border-radius: 0;
 	box-shadow: 0 8px 28px rgb(15 47 40 / 6%);
 }
 

@@ -235,7 +235,7 @@
 	min-width: 0;
 	height: 100%;
 	margin: 0;
-	border-radius: 16px;
+	border-radius: 0;
 	background-color: var(--primary-white);
 	box-shadow: 0 8px 28px rgb(15 47 40 / 6%);
 	overflow: hidden;
@@ -264,9 +264,11 @@
 	position: relative;
 	flex: 0 0 auto;
 	width: 100%;
-	aspect-ratio: 4 / 3;
+	/* Vuông — vùng ảnh cao hơn 4:3, lấp đầy khung (object-fit: cover). */
+	aspect-ratio: 1 / 1;
 	overflow: hidden;
-	background-color: var(--luxury-cream-pale);
+	border: 1px solid var(--luxury-forest);
+	background-color: var(--primary-white);
 }
 
 .fp__image-figure,
