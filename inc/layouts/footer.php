@@ -19,41 +19,8 @@ class Footer_Layout
 	public function __construct()
 	{
 		add_action('after_setup_theme', [$this, 'register_menus'], 20);
-		add_action('acf/init', [$this, 'register_acf_options_page']);
 		add_filter('nav_menu_link_attributes', [$this, 'footer_nav_link_attributes'], 10, 4);
 		add_filter('nav_menu_css_class', [$this, 'footer_nav_item_classes'], 10, 4);
-	}
-
-	/**
-	 * ACF Options sub-page under theme settings.
-	 */
-	public function register_acf_options_page()
-	{
-		if (!function_exists('acf_add_options_page')) {
-			return;
-		}
-
-		acf_add_options_page(
-			[
-				'page_title' => __('Cài đặt Cordyceps', 'cordyceps'),
-				'menu_title' => __('Cordyceps', 'cordyceps'),
-				'menu_slug' => 'cordyceps-theme',
-				'capability' => 'edit_theme_options',
-				'redirect' => true,
-				'position' => 59,
-				'icon_url' => 'dashicons-admin-generic',
-			]
-		);
-
-		acf_add_options_sub_page(
-			[
-				'page_title' => __('Footer', 'cordyceps'),
-				'menu_title' => __('Footer', 'cordyceps'),
-				'menu_slug' => 'cordyceps-footer',
-				'parent_slug' => 'cordyceps-theme',
-				'capability' => 'edit_theme_options',
-			]
-		);
 	}
 
 	/**

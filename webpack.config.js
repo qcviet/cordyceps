@@ -1,5 +1,6 @@
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
@@ -107,6 +108,14 @@ module.exports = {
 		minimizer: [new CssMinimizerPlugin()],
 	},
 	plugins: [
+		new CopyWebpackPlugin({
+			patterns: [
+				{
+					from: path.resolve(__dirname, 'src/static-assets'),
+					to: path.resolve(__dirname, 'static-assets'),
+				},
+			],
+		}),
 		new MiniCssExtractPlugin({
 			filename: devMode ? './css/[name].css' : './css/[name].min.css',
 		}),

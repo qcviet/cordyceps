@@ -148,27 +148,23 @@ class Theme_Init
 	}
 
 	/**
-	 * Prefer development assets locally, but always fallback to existing files.
+	 * Resolve built asset URL: prefer minified file when present, else dev build.
 	 */
 	function resolve_asset_uri($type, $name)
 	{
-		$localhost_callback = __NAMESPACE__ . '\\cordyceps_is_localhost';
-		$is_localhost = function_exists($localhost_callback) ? cordyceps_is_localhost() : false;
-		$preferred_suffix = $is_localhost ? '' : '.min';
-		$fallback_suffix = $preferred_suffix === '.min' ? '' : '.min';
+		$base_uri = get_stylesheet_directory_uri();
+		$min_relative_path = "assets/{$type}/{$name}.min.{$type}";
+		$dev_relative_path = "assets/{$type}/{$name}.{$type}";
 
-		$preferred_relative_path = "assets/{$type}/{$name}{$preferred_suffix}.{$type}";
-		$fallback_relative_path = "assets/{$type}/{$name}{$fallback_suffix}.{$type}";
-
-		if (file_exists(get_theme_file_path($preferred_relative_path))) {
-			return get_stylesheet_directory_uri() . '/' . $preferred_relative_path;
+		if (file_exists(get_theme_file_path($min_relative_path))) {
+			return $base_uri . '/' . $min_relative_path;
 		}
 
-		if (file_exists(get_theme_file_path($fallback_relative_path))) {
-			return get_stylesheet_directory_uri() . '/' . $fallback_relative_path;
+		if (file_exists(get_theme_file_path($dev_relative_path))) {
+			return $base_uri . '/' . $dev_relative_path;
 		}
 
-		return get_stylesheet_directory_uri() . '/' . $preferred_relative_path;
+		return $base_uri . '/' . $dev_relative_path;
 	}
 
 	function register_layout_hooks()
