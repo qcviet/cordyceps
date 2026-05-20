@@ -1038,12 +1038,14 @@
 	}
 }
 
+/*
+ * Drawer: khóa cuộn chủ yếu bằng JS (position:fixed + lưu scrollY trong header.js) — iOS không bị đơ do touch-action /
+ * overflow trên html. Giữ overscroll-behaviour để hạn bounce khi backdrop hiển thị.
+ */
 html.is-header-nav-open {
 	overflow: hidden;
-	height: 100%;
 }
 
 html.is-header-nav-open body {
-	overflow: hidden;
-	touch-action: none;
+	overscroll-behavior: none;
 }

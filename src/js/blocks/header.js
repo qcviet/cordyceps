@@ -46,15 +46,54 @@ export default el => {
 
   let scrollRaf = 0
   let lastFocus = null
+  /** Offset cuộn lưu khi khóa body (position:fixed) — iOS/Safari đọc scrollY ≈ 0 khi đang khóa. */
+  let drawerScrollLockY = 0
 
   const isDrawerMode = () => (mq ? mq.matches : window.innerWidth <= 1023)
 
-  /** Gỡ trạng thái drawer/scroll-lock khi menu đã đóng — tránh Safari kẹt lớp + touch-action: none. */
+  const releaseBodyScrollLock = () => {
+    if (document.body.dataset.cordycepsHeaderScrollLock !== '1') {
+      return
+    }
+    document.body.dataset.cordycepsHeaderScrollLock = ''
+    document.body.style.position = ''
+    document.body.style.top = ''
+    document.body.style.left = ''
+    document.body.style.right = ''
+    document.body.style.width = ''
+    const y = drawerScrollLockY
+    drawerScrollLockY = 0
+    window.scrollTo(0, y)
+  }
+
+  const applyBodyScrollLock = () => {
+    if (!isDrawerMode()) {
+      return
+    }
+    if (document.body.dataset.cordycepsHeaderScrollLock === '1') {
+      return
+    }
+    drawerScrollLockY =
+      window.scrollY ||
+      window.pageYOffset ||
+      document.documentElement.scrollTop ||
+      document.body.scrollTop ||
+      0
+    document.body.dataset.cordycepsHeaderScrollLock = '1'
+    document.body.style.position = 'fixed'
+    document.body.style.top = `-${drawerScrollLockY}px`
+    document.body.style.left = '0'
+    document.body.style.right = '0'
+    document.body.style.width = '100%'
+  }
+
+  /** Gỡ trạng thái drawer/scroll-lock khi menu đã đóng — tránh Safari kẹt lớp. */
   const healDrawerClosedIfNeeded = () => {
     if (el.classList.contains(NAV_OPEN_CLASS)) {
       return
     }
     document.documentElement.classList.remove(HTML_LOCK_CLASS)
+    releaseBodyScrollLock()
     nav.classList.remove(NAV_DRAWER_OPEN_CLASS)
     if (overlay) {
       overlay.classList.remove(OVERLAY_OPEN_CLASS)
@@ -65,6 +104,11 @@ export default el => {
     const shouldLock =
       el.classList.contains(NAV_OPEN_CLASS) && isDrawerMode()
     document.documentElement.classList.toggle(HTML_LOCK_CLASS, shouldLock)
+    if (shouldLock) {
+      applyBodyScrollLock()
+    } else {
+      releaseBodyScrollLock()
+    }
   }
 
   const syncNavAccessibility = () => {
@@ -106,13 +150,13 @@ export default el => {
     if (open && isDrawerMode()) {
       lastFocus = document.activeElement
       const searchInput = nav.querySelector('.header__search-input')
+      const firstMenuLink = nav.querySelector(
+        '.header__nav-list > .menu-item > a[href]'
+      )
       const firstLink = nav.querySelector('a[href]')
-      const target =
-        searchInput && typeof searchInput.focus === 'function'
-          ? searchInput
-          : firstLink
+      const target = firstMenuLink || firstLink || searchInput
       if (target && typeof target.focus === 'function') {
-        window.requestAnimationFrame(() => target.focus())
+        window.requestAnimationFrame(() => target.focus({ preventScroll: true }))
       }
     } else if (!open && lastFocus && typeof lastFocus.focus === 'function') {
       lastFocus.focus()
@@ -165,12 +209,15 @@ export default el => {
     if (scrollRaf) return
     scrollRaf = window.requestAnimationFrame(() => {
       scrollRaf = 0
-      const y =
-        window.scrollY ||
-        window.pageYOffset ||
-        document.documentElement.scrollTop ||
-        document.body.scrollTop ||
-        0
+      const locked =
+        document.body.dataset.cordycepsHeaderScrollLock === '1'
+      const y = locked
+        ? drawerScrollLockY
+        : window.scrollY ||
+          window.pageYOffset ||
+          document.documentElement.scrollTop ||
+          document.body.scrollTop ||
+          0
       el.classList.toggle(SCROLLED_CLASS, y > 10)
       syncScrollLock()
       healDrawerClosedIfNeeded()
@@ -334,6 +381,7 @@ export default el => {
         mq.removeListener(onMqChange)
       }
       document.documentElement.classList.remove(HTML_LOCK_CLASS)
+      releaseBodyScrollLock()
       el.classList.remove(NAV_OPEN_CLASS, SCROLLED_CLASS)
       nav.classList.remove(NAV_DRAWER_OPEN_CLASS)
       overlay && overlay.classList.remove(OVERLAY_OPEN_CLASS)
