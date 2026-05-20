@@ -148,22 +148,23 @@ class Theme_Init
 	}
 
 	/**
-	 * Prefer built production assets (.min); fallback to dev build output.
+	 * Resolve built asset URL: prefer minified file when present, else dev build.
 	 */
 	function resolve_asset_uri($type, $name)
 	{
+		$base_uri = get_stylesheet_directory_uri();
 		$min_relative_path = "assets/{$type}/{$name}.min.{$type}";
 		$dev_relative_path = "assets/{$type}/{$name}.{$type}";
 
 		if (file_exists(get_theme_file_path($min_relative_path))) {
-			return get_stylesheet_directory_uri() . '/' . $min_relative_path;
+			return $base_uri . '/' . $min_relative_path;
 		}
 
 		if (file_exists(get_theme_file_path($dev_relative_path))) {
-			return get_stylesheet_directory_uri() . '/' . $dev_relative_path;
+			return $base_uri . '/' . $dev_relative_path;
 		}
 
-		return get_stylesheet_directory_uri() . '/' . $min_relative_path;
+		return $base_uri . '/' . $dev_relative_path;
 	}
 
 	function register_layout_hooks()
