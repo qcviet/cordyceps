@@ -12,6 +12,10 @@ module.exports = {
 	entry: {
 		frontend: path.resolve(process.cwd(), './src/frontend.js'),
 		bootstrap: path.resolve(process.cwd(), './src/bootstrap.js'),
+		'editor-product-content': path.resolve(
+			process.cwd(),
+			'./src/postcss/editor-product-content.css'
+		),
 	},
 	output: {
 		path: path.resolve(__dirname, 'assets'),

@@ -27,6 +27,7 @@ class Product_Single_Layout
 		add_filter('generate_show_post_thumbnail', '__return_false');
 		add_filter('generate_show_entry_header', '__return_false');
 	}
+
 }
 
 new Product_Single_Layout();
