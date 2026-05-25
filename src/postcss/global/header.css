@@ -524,10 +524,10 @@
 	position: relative;
 	display: block;
 	padding: 14px 0;
-	font-family: var(--font-default);
+	font-family: Arial, Helvetica, sans-serif;
 	font-size: 15px;
-	font-weight: var(--font-semibold);
-	letter-spacing: 0.1em;
+	font-weight: 750;
+	letter-spacing: 0.08em;
 	text-decoration: none;
 	color: var(--luxury-forest);
 	border-bottom: 1px solid var(--header-border-overlay);
@@ -690,8 +690,10 @@
 	.header .header__nav-list > .menu-item > a {
 		display: inline-block;
 		padding: 6px 4px;
+		font-family: Arial, Helvetica, sans-serif;
 		font-size: clamp(11px, 0.95vw, 13px);
-		letter-spacing: 0.12em;
+		font-weight: 750;
+		letter-spacing: 0.1em;
 		white-space: nowrap;
 		border-bottom: none;
 	}
