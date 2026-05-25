@@ -25,7 +25,7 @@ if (empty($data['content'])) {
 				<span class="product-content__title-text"><?php esc_html_e('Chi tiết sản phẩm', 'cordyceps'); ?></span>
 			</h2>
 		</header>
-		<div class="product-content__body entry-content">
+		<div class="product-content__body entry-content cordyceps-rich-content">
 			<?php echo $data['content']; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- filtered via the_content. ?>
 		</div>
 	</div>
