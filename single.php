@@ -137,7 +137,7 @@ while (have_posts()) :
 							</ul>
 						</header>
 
-						<div class="post-single__content entry-content" itemprop="articleBody">
+						<div class="post-single__content entry-content cordyceps-rich-content" itemprop="articleBody">
 							<?php the_content(); ?>
 						</div>
 					</div>
