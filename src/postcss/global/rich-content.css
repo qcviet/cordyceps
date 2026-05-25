@@ -1,0 +1,97 @@
+/**
+ * Shared typography for post/product long-form HTML (class cordyceps-rich-content).
+ *
+ * @package cordyceps
+ */
+
+.cordyceps-rich-content {
+	--rc-font: Arial, Helvetica, sans-serif;
+	--rc-size: 16px;
+	--rc-line: 1.75;
+	--rc-heading-gap: 0.65em;
+	font-family: var(--rc-font);
+	font-size: var(--rc-size);
+	line-height: var(--rc-line);
+}
+
+.cordyceps-rich-content > *:first-child {
+	margin-top: 0;
+}
+
+.cordyceps-rich-content > *:last-child {
+	margin-bottom: 0;
+}
+
+.cordyceps-rich-content :is(p, li, td, th) {
+	font-family: inherit;
+	font-size: inherit;
+	line-height: inherit;
+}
+
+.cordyceps-rich-content :is(h1, h2, h3, h4, h5, h6, .wp-block-heading) {
+	margin-block: 0 var(--rc-heading-gap);
+	font-family: inherit;
+	font-weight: 600;
+	line-height: 1.35;
+}
+
+.cordyceps-rich-content :is(h1, h2, h3, h4, h5, h6, .wp-block-heading) :is(span, a, strong, em, b, i) {
+	font: inherit;
+	color: inherit;
+}
+
+.cordyceps-rich-content h1,
+.cordyceps-rich-content h1.wp-block-heading {
+	font-size: 22px;
+}
+
+.cordyceps-rich-content h2,
+.cordyceps-rich-content h2.wp-block-heading {
+	font-size: 20px;
+}
+
+.cordyceps-rich-content h3,
+.cordyceps-rich-content h3.wp-block-heading {
+	font-size: 18px;
+}
+
+.cordyceps-rich-content h4,
+.cordyceps-rich-content h4.wp-block-heading {
+	font-size: 17px;
+}
+
+.cordyceps-rich-content h5,
+.cordyceps-rich-content h5.wp-block-heading,
+.cordyceps-rich-content h6,
+.cordyceps-rich-content h6.wp-block-heading {
+	font-size: var(--rc-size);
+}
+
+.cordyceps-rich-content .lwptoc {
+	margin: 0 0 1.25em;
+	padding: 20px 24px;
+	border: 1px solid rgb(31 61 53 / 12%);
+	border-radius: 12px;
+	background: #faf8f4;
+	font-family: inherit;
+	font-size: var(--rc-size);
+	line-height: var(--rc-line);
+}
+
+.cordyceps-rich-content .lwptoc_header,
+.cordyceps-rich-content .lwptoc_title {
+	margin: 0 0 12px;
+	font-family: inherit;
+	font-size: 18px;
+	font-weight: 600;
+	line-height: 1.35;
+}
+
+.cordyceps-rich-content .lwptoc_item,
+.cordyceps-rich-content .lwptoc_item a {
+	font-family: inherit;
+	font-size: var(--rc-size);
+	font-weight: 400;
+	line-height: 1.55;
+	text-decoration: none;
+}

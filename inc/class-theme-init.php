@@ -25,6 +25,7 @@ include_once get_theme_file_path('inc/helpers/product-rewrite.php');
 include_once get_theme_file_path('inc/helpers/product-page.php');
 include_once get_theme_file_path('inc/helpers/nav-menu.php');
 include_once get_theme_file_path('inc/helpers/post-single.php');
+include_once get_theme_file_path('inc/helpers/rich-content.php');
 include_once get_theme_file_path('inc/helpers/post-rewrite.php');
 include_once get_theme_file_path('inc/helpers/footer.php');
 include_once get_theme_file_path('inc/helpers/debug.php');
@@ -188,6 +189,7 @@ class Theme_Init
 	function theme_supports()
 	{
 		load_theme_textdomain('cordyceps', get_theme_file_path('languages'));
+		add_theme_support('editor-styles');
 	}
 }
 
